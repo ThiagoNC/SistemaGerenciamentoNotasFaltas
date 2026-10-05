@@ -1,0 +1,35 @@
+DROP DATABASE SistemaGerenciamentoNotasFaltas;
+CREATE DATABASE IF NOT EXISTS SistemaGerenciamentoNotasFaltas;
+USE SistemaGerenciamentoNotasFaltas;
+
+CREATE TABLE Aluno (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Matricula INT NOT NULL
+);
+
+CREATE TABLE Disciplina (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    CargaHoraria INT NOT NULL
+);
+
+CREATE TABLE Nota (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    AlunoId INT NOT NULL,
+    DisciplinaId INT NOT NULL,
+    ValorNota DECIMAL(5,2) NOT NULL,
+    
+    FOREIGN KEY (AlunoId) REFERENCES Aluno(Id) ON DELETE CASCADE,
+    FOREIGN KEY (DisciplinaId) REFERENCES Disciplina(Id) ON DELETE CASCADE
+);
+
+CREATE TABLE Falta (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    AlunoId INT NOT NULL,
+    DisciplinaId INT NOT NULL,
+    DataFalta DATE NOT NULL,
+    
+    FOREIGN KEY (AlunoId) REFERENCES Aluno(Id) ON DELETE CASCADE,
+    FOREIGN KEY (DisciplinaId) REFERENCES Disciplina(Id) ON DELETE CASCADE
+);
