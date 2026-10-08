@@ -6,8 +6,10 @@ namespace SistemaGerenciamentoNotasFaltas.Models
 {
     internal class Nota
     {
-        public int AlunoId { get; set; }
-        public int DisciplinaId { get; set; }
-        public double ValorNota { get; set; }
+        public int Id { get; set; }
+        public int IdMatricula { get; set; }
+        public string Tipo { get; set; }
+        public decimal Valor { get; set; }
+        public DateTime DataLancamento { get; set; }
     }
 }

@@ -10,107 +10,120 @@ namespace SistemaGerenciamentoNotasFaltas.Repositories
     {
         private readonly ConexaoBanco _conexaoBanco;
 
-        public AlunoRepository()
-        {
-            _conexaoBanco = new ConexaoBanco();
-        }
+        public AlunoRepository() => _conexaoBanco = new ConexaoBanco();
 
         public void Inserir(Aluno aluno)
         {
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
+            using (var conexao = _conexaoBanco.GetConexao())
             {
-                string sql = "INSERT INTO Aluno (nome, matricula) VALUES (@nome, @matricula)";
+                string query = "INSERT INTO Aluno (ra, nome, email) VALUES (@ra, @nome, @email)";
 
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@nome", aluno.Nome);
-                comando.Parameters.AddWithValue("@matricula", aluno.Matricula);
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@ra", aluno.Ra);
+                    comando.Parameters.AddWithValue("@nome", aluno.Nome);
+                    comando.Parameters.AddWithValue("@email", aluno.Email);
 
-                conexao.Open();
-                comando.ExecuteNonQuery();
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
             }
         }
 
         public void Atualizar(Aluno aluno)
         {
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
+            using (var conexao = _conexaoBanco.GetConexao())
             {
-                string sql = "UPDATE Aluno SET nome = @nome, matricula = @matricula WHERE id = @id";
+                string query = "UPDATE Aluno SET ra = @ra, nome = @nome, email = @email WHERE id = @id";
 
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@nome", aluno.Nome);
-                comando.Parameters.AddWithValue("@matricula", aluno.Matricula);
-                comando.Parameters.AddWithValue("@id", aluno.Id);
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@ra", aluno.Ra);
+                    comando.Parameters.AddWithValue("@nome", aluno.Nome);
+                    comando.Parameters.AddWithValue("@email", aluno.Email);
+                    comando.Parameters.AddWithValue("@id", aluno.Id);
 
-                conexao.Open();
-                comando.ExecuteNonQuery();
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
             }
         }
 
-        public void Deletar(int id)
+        public void Excluir(int id)
         {
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
+            using (var conexao = _conexaoBanco.GetConexao())
             {
-                string sql = "DELETE FROM Aluno WHERE id = @id";
+                string query = "DELETE FROM Aluno WHERE id = @id";
 
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@id", id);
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@id", id);
 
-                conexao.Open();
-                comando.ExecuteNonQuery();
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
             }
+        }
+
+        public Aluno ListarPorId(int id)
+        {
+            Aluno aluno = null;
+
+            using (var conexao = _conexaoBanco.GetConexao())
+            {
+                string query = "SELECT Id, Ra, Nome, Email FROM Aluno WHERE id = @id";
+
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@id", id);
+
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            aluno = new Aluno
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Ra = reader["Ra"].ToString(),
+                                Nome = reader["Nome"].ToString(),
+                                Email = reader["Email"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+
+            return aluno;
         }
 
         public List<Aluno> ListarTodos()
         {
-            var lista = new List<Aluno>();
+            var alunos = new List<Aluno>();
 
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
+            using (var conexao = _conexaoBanco.GetConexao())
             {
-                string sql = "SELECT id, nome, matricula FROM Aluno";
-                var comando = new MySqlCommand(sql, conexao);
+                string query = "SELECT Id, Ra, Nome, Email FROM Aluno";
 
-                conexao.Open();
-                using (MySqlDataReader reader = comando.ExecuteReader())
+                using (var comando = new MySqlCommand(query, conexao))
                 {
-                    while (reader.Read())
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
                     {
-                        lista.Add(new Aluno
+                        while (reader.Read())
                         {
-                            Id = Convert.ToInt32(reader["id"]),
-                            Nome = reader["nome"].ToString(),
-                            Matricula = Convert.ToInt32(reader["matricula"])
-                        });
+                            alunos.Add(new Aluno
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Ra = reader["Ra"].ToString(),
+                                Nome = reader["Nome"].ToString(),
+                                Email = reader["Email"].ToString()
+                            });
+                        }
                     }
                 }
             }
-            return lista;
-        }
-
-        public List<Aluno> ListarPorNome(string nome)
-        {
-            var lista = new List<Aluno>();
-
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
-            {
-                string sql = "SELECT id, nome, matricula FROM Aluno WHERE nome LIKE @nome";
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@nome", "%" + nome + "%");
-
-                conexao.Open();
-                using (MySqlDataReader reader = comando.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        lista.Add(new Aluno
-                        {
-                            Id = Convert.ToInt32(reader["id"]),
-                            Nome = reader["nome"].ToString(),
-                            Matricula = Convert.ToInt32(reader["matricula"])
-                        });
-                    }
-                }
-            }
-            return lista;
+            return alunos;
         }
     }
 }

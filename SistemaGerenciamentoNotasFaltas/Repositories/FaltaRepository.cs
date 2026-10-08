@@ -10,109 +10,122 @@ namespace SistemaGerenciamentoNotasFaltas.Repositories
     {
         private readonly ConexaoBanco _conexaoBanco;
 
-        public FaltaRepository()
-        {
-            _conexaoBanco = new ConexaoBanco();
-        }
+        public FaltaRepository() => _conexaoBanco = new ConexaoBanco();
 
         public void Inserir(Falta falta)
         {
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
+            using (var conexao = _conexaoBanco.GetConexao())
             {
-                string sql = "INSERT INTO Falta (alunoId, disciplinaId, dataFalta) VALUES (@alunoId, @disciplinaId, @dataFalta)";
+                string query = "INSERT INTO Falta (id_matricula, data_falta, quantidade) VALUES (@idMatricula, @dataFalta, @quantidade)";
 
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@alunoId", falta.AlunoId);
-                comando.Parameters.AddWithValue("@disciplinaId", falta.DisciplinaId);
-                comando.Parameters.AddWithValue("@dataFalta", falta.DataFalta);
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@idMatricula", falta.IdMatricula);
+                    comando.Parameters.AddWithValue("@dataFalta", falta.DataFalta);
+                    comando.Parameters.AddWithValue("@quantidade", falta.Quantidade);
 
-                conexao.Open();
-                comando.ExecuteNonQuery();
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
             }
         }
 
         public void Atualizar(Falta falta)
         {
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
+            using (var conexao = _conexaoBanco.GetConexao())
             {
-                string sql = "UPDATE Falta SET dataFalta = @dataFalta WHERE alunoId = @alunoId and disciplinaId = @disciplinaId";
+                string query = "UPDATE Falta SET id_matricula = @idMatricula, data_falta = @dataFalta, quantidade = @quantidade WHERE id = @id";
 
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@alunoId", falta.AlunoId);
-                comando.Parameters.AddWithValue("@disciplinaId", falta.DisciplinaId);
-                comando.Parameters.AddWithValue("@dataFalta", falta.DataFalta);
-
-                conexao.Open();
-                comando.ExecuteNonQuery();
-            }
-        }
-
-        public void Deletar(int alunoId, int disciplinaId)
-        {
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
-            {
-                string sql = "DELETE FROM Falta WHERE alunoId = @alunoId AND disciplinaId = @disciplinaId ";
-
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@alunoId", alunoId);
-                comando.Parameters.AddWithValue("@disciplinaId", disciplinaId);
-
-                conexao.Open();
-                comando.ExecuteNonQuery();
-            }
-        }
-
-        public List<Falta> ListarTodos()
-        {
-            var lista = new List<Falta>();
-
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
-            {
-                string sql = "SELECT alunoId, disciplinaId, dataFalta FROM Falta";
-                var comando = new MySqlCommand(sql, conexao);
-
-                conexao.Open();
-                using (MySqlDataReader reader = comando.ExecuteReader())
+                using (var comando = new MySqlCommand(query, conexao))
                 {
-                    while (reader.Read())
+                    comando.Parameters.AddWithValue("@idMatricula", falta.IdMatricula);
+                    comando.Parameters.AddWithValue("@dataFalta", falta.DataFalta);
+                    comando.Parameters.AddWithValue("@quantidade", falta.Quantidade);
+                    comando.Parameters.AddWithValue("@id", falta.Id);
+
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Excluir(int id)
+        {
+            using (var conexao = _conexaoBanco.GetConexao())
+            {
+                string query = "DELETE FROM Falta WHERE id = @id";
+
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@id", id);
+
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public Falta ListarPorId(int id)
+        {
+            Falta falta = null;
+
+            using (var conexao = _conexaoBanco.GetConexao())
+            {
+                string query = "SELECT Id, Id_Matricula, Data_Falta, Quantidade FROM Falta WHERE id = @id";
+
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@id", id);
+
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
                     {
-                        lista.Add(new Falta
+                        if (reader.Read())
                         {
-                            AlunoId = Convert.ToInt32(reader["alunoId"]),
-                            DisciplinaId = Convert.ToInt32(reader["disciplinaId"]),
-                            DataFalta = Convert.ToDateTime(reader["dataFalta"])
-                        });
+                            falta = new Falta
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                IdMatricula = Convert.ToInt32(reader["Id_Matricula"]),
+                                DataFalta = Convert.ToDateTime(reader["Data_Falta"]),
+                                Quantidade = Convert.ToInt32(reader["Quantidade"])
+                            };
+                        }
                     }
                 }
             }
-            return lista;
+
+            return falta;
         }
 
-        public List<Falta> ListarPorNome(string nome)
+        public List<Falta> ListarPorMatricula(int idMatricula)
         {
-            var lista = new List<Falta>();
+            var faltas = new List<Falta>();
 
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
+            using (var conexao = _conexaoBanco.GetConexao())
             {
-                string sql = "SELECT alunoId, disciplinaId, dataFalta FROM Falta WHERE nome LIKE @nome";
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@nome", "%" + nome + "%");
+                string query = "SELECT Id, Id_Matricula, Data_Falta, Quantidade FROM Falta WHERE id_matricula = @idMatricula";
 
-                conexao.Open();
-                using (MySqlDataReader reader = comando.ExecuteReader())
+                using (var comando = new MySqlCommand(query, conexao))
                 {
-                    while (reader.Read())
+                    comando.Parameters.AddWithValue("@idMatricula", idMatricula);
+
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
                     {
-                        lista.Add(new Falta
+                        while (reader.Read())
                         {
-                            AlunoId = Convert.ToInt32(reader["alunoId"]),
-                            DisciplinaId = Convert.ToInt32(reader["disciplinaId"]),
-                            DataFalta = Convert.ToDateTime(reader["dataFalta"])
-                        });
+                            faltas.Add(new Falta
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                IdMatricula = Convert.ToInt32(reader["Id_Matricula"]),
+                                DataFalta = Convert.ToDateTime(reader["Data_Falta"]),
+                                Quantidade = Convert.ToInt32(reader["Quantidade"])
+                            });
+                        }
                     }
                 }
             }
-            return lista;
+            return faltas;
         }
     }
 }

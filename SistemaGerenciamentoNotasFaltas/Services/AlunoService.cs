@@ -8,34 +8,39 @@ namespace SistemaGerenciamentoNotasFaltas.Services
 {
     internal class AlunoService
     {
-        private readonly AlunoRepository _repository;
+        private readonly AlunoRepository _alunoRepository;
 
-        public AlunoService()
-        {
-            _repository = new AlunoRepository();
-        }
+        public AlunoService() => _alunoRepository = new AlunoRepository();
 
         public void Inserir(Aluno aluno)
         {
-            if (string.IsNullOrWhiteSpace(aluno.Nome)) throw new Exception("O nome é obrigatório.");
-            if (aluno.Matricula <= 0) throw new Exception("A matrícula é obrigatório.");
+            if (string.IsNullOrWhiteSpace(aluno.Nome)) throw new Exception("O nome do aluno é obrigatório.");
 
-            _repository.Inserir(aluno);
+            if (string.IsNullOrWhiteSpace(aluno.Ra)) throw new Exception("O RA do aluno é obrigatório.");
+
+            if (aluno.Ra.Length < 5) throw new Exception("O RA fornecido é inválido. Digite um RA completo.");
+
+            _alunoRepository.Inserir(aluno);
         }
 
         public void Atualizar(Aluno aluno)
         {
-            _repository.Atualizar(aluno);
+            if (aluno.Id <= 0) throw new Exception("Aluno inválido para atualização.");
+
+            if (string.IsNullOrWhiteSpace(aluno.Nome)) throw new Exception("O nome do aluno não pode ficar em branco.");
+
+            _alunoRepository.Atualizar(aluno);
         }
 
-        public void Deletar(int id)
+        public void Excluir(int id)
         {
             if (id <= 0) throw new Exception("Selecione um aluno válido para excluir.");
-            _repository.Deletar(id);
+
+            _alunoRepository.Excluir(id);
         }
 
-        public List<Aluno> ListarTodos() => _repository.ListarTodos();
+        public Aluno ListarPorId(int id) => _alunoRepository.ListarPorId(id);
 
-        public List<Aluno> ListarPorNome(string nome) => _repository.ListarPorNome(nome);
+        public List<Aluno> ListarTodos() => _alunoRepository.ListarTodos();
     }
 }

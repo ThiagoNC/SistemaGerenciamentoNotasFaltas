@@ -8,34 +8,39 @@ namespace SistemaGerenciamentoNotasFaltas.Services
 {
     internal class DisciplinaService
     {
-        private readonly DisciplinaRepository _repository;
+        private readonly DisciplinaRepository _disciplinaRepository;
 
-        public DisciplinaService()
-        {
-            _repository = new DisciplinaRepository();
-        }
+        public DisciplinaService() => _disciplinaRepository = new DisciplinaRepository();
 
         public void Inserir(Disciplina disciplina)
         {
-            if (string.IsNullOrWhiteSpace(disciplina.Nome)) throw new Exception("O nome é obrigatório.");
-            if (disciplina.CargaHoraria <= 0) throw new Exception("A carga horária é obrigatória.");
+            if (string.IsNullOrWhiteSpace(disciplina.Nome)) throw new Exception("O nome da disciplina é obrigatório.");
 
-            _repository.Inserir(disciplina);
+            if (disciplina.CargaHoraria <= 0) throw new Exception("A carga horária deve ser maior que zero.");
+
+            _disciplinaRepository.Inserir(disciplina);
         }
 
         public void Atualizar(Disciplina disciplina)
         {
-            _repository.Atualizar(disciplina);
+            if (disciplina.Id <= 0) throw new Exception("Disciplina inválida para atualização.");
+
+            if (string.IsNullOrWhiteSpace(disciplina.Nome)) throw new Exception("O nome da disciplina não pode ficar em branco.");
+
+            if (disciplina.CargaHoraria <= 0) throw new Exception("A carga horária deve ser maior que zero.");
+
+            _disciplinaRepository.Atualizar(disciplina);
         }
 
-        public void Deletar(int id)
+        public void Excluir(int id)
         {
             if (id <= 0) throw new Exception("Selecione uma disciplina válida para excluir.");
-            _repository.Deletar(id);
+
+            _disciplinaRepository.Excluir(id);
         }
 
-        public List<Disciplina> ListarTodos() => _repository.ListarTodos();
+        public Disciplina ListarPorId(int id) => _disciplinaRepository.ListarPorId(id);
 
-        public List<Disciplina> ListarPorNome(string nome) => _repository.ListarPorNome(nome);
+        public List<Disciplina> ListarTodos() => _disciplinaRepository.ListarTodos();
     }
 }

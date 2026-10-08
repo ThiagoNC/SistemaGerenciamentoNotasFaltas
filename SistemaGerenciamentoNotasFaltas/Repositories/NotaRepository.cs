@@ -10,110 +10,126 @@ namespace SistemaGerenciamentoNotasFaltas.Repositories
     {
         private readonly ConexaoBanco _conexaoBanco;
 
-        public NotaRepository()
-        {
-            _conexaoBanco = new ConexaoBanco();
-        }
+        public NotaRepository() => _conexaoBanco = new ConexaoBanco();
 
         public void Inserir(Nota nota)
         {
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
+            using (var conexao = _conexaoBanco.GetConexao())
             {
-                string sql = "INSERT INTO Nota (alunoId, disciplinaId, valorNota) VALUES (@alunoId, @disciplinaId, @valorNota)";
+                string query = "INSERT INTO Nota (id_matricula, tipo, valor, data_lancamento) VALUES (@idMatricula, @tipo, @valor, @dataLancamento)";
 
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@alunoId", nota.AlunoId);
-                comando.Parameters.AddWithValue("@disciplinaId", nota.DisciplinaId);
-                comando.Parameters.AddWithValue("@valorNota", nota.ValorNota);
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@idMatricula", nota.IdMatricula);
+                    comando.Parameters.AddWithValue("@tipo", nota.Tipo);
+                    comando.Parameters.AddWithValue("@valor", nota.Valor);
+                    comando.Parameters.AddWithValue("@dataLancamento", nota.DataLancamento == DateTime.MinValue ? DateTime.Now : nota.DataLancamento);
 
-
-                conexao.Open();
-                comando.ExecuteNonQuery();
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
             }
         }
 
         public void Atualizar(Nota nota)
         {
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
+            using (var conexao = _conexaoBanco.GetConexao())
             {
-                string sql = "UPDATE Nota SET valorNota = @valorNota WHERE alunoId = @alunoId and disciplinaId = @disciplinaId";
+                string query = "UPDATE Nota SET id_matricula = @idMatricula, tipo = @tipo, valor = @valor, data_lancamento = @dataLancamento WHERE id = @id";
 
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@alunoId", nota.AlunoId);
-                comando.Parameters.AddWithValue("@disciplinaId", nota.DisciplinaId);
-                comando.Parameters.AddWithValue("@valorNota", nota.ValorNota);
-
-                conexao.Open();
-                comando.ExecuteNonQuery();
-            }
-        }
-
-        public void Deletar(int alunoId, int disciplinaId)
-        {
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
-            {
-                string sql = "DELETE FROM Nota WHERE alunoId = @alunoId AND disciplinaId = @disciplinaId";
-
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@alunoId", alunoId);
-                comando.Parameters.AddWithValue("@disciplinaId", disciplinaId);
-
-                conexao.Open();
-                comando.ExecuteNonQuery();
-            }
-        }
-
-        public List<Nota> ListarTodos()
-        {
-            var lista = new List<Nota>();
-
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
-            {
-                string sql = "SELECT alunoId, disciplinaId, valorNota FROM Nota";
-                var comando = new MySqlCommand(sql, conexao);
-
-                conexao.Open();
-                using (MySqlDataReader reader = comando.ExecuteReader())
+                using (var comando = new MySqlCommand(query, conexao))
                 {
-                    while (reader.Read())
+                    comando.Parameters.AddWithValue("@idMatricula", nota.IdMatricula);
+                    comando.Parameters.AddWithValue("@tipo", nota.Tipo);
+                    comando.Parameters.AddWithValue("@valor", nota.Valor);
+                    comando.Parameters.AddWithValue("@dataLancamento", nota.DataLancamento);
+                    comando.Parameters.AddWithValue("@id", nota.Id);
+
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Excluir(int id)
+        {
+            using (var conexao = _conexaoBanco.GetConexao())
+            {
+                string query = "DELETE FROM Nota WHERE id = @id";
+
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@id", id);
+
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public Nota ListarPorId(int id)
+        {
+            Nota nota = null;
+
+            using (var conexao = _conexaoBanco.GetConexao())
+            {
+                string query = "SELECT Id, Id_Matricula, Tipo, Valor, Data_Lancamento FROM Nota WHERE id = @id";
+
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@id", id);
+
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
                     {
-                        lista.Add(new Nota
+                        if (reader.Read())
                         {
-                            AlunoId = Convert.ToInt32(reader["alunoId"]),
-                            DisciplinaId = Convert.ToInt32(reader["disciplinaId"]),
-                            ValorNota = Convert.ToDouble(reader["valorNota"])
-                        });
+                            nota = new Nota
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                IdMatricula = Convert.ToInt32(reader["Id_Matricula"]),
+                                Tipo = reader["Tipo"].ToString(),
+                                Valor = Convert.ToDecimal(reader["Valor"]),
+                                DataLancamento = Convert.ToDateTime(reader["Data_Lancamento"])
+                            };
+                        }
                     }
                 }
             }
-            return lista;
+
+            return nota;
         }
 
-        public List<Nota> ListarPorNome(string nome)
+        public List<Nota> ListarPorMatricula(int idMatricula)
         {
-            var lista = new List<Nota>();
+            var notas = new List<Nota>();
 
-            using (MySqlConnection conexao = _conexaoBanco.GetConexao())
+            using (var conexao = _conexaoBanco.GetConexao())
             {
-                string sql = "SELECT alunoId, disciplinaId, valorNota FROM Nota WHERE nome LIKE @nome";
-                var comando = new MySqlCommand(sql, conexao);
-                comando.Parameters.AddWithValue("@nome", "%" + nome + "%");
+                string query = "SELECT Id, Id_Matricula, Tipo, Valor, Data_Lancamento FROM Nota WHERE id_matricula = @idMatricula";
 
-                conexao.Open();
-                using (MySqlDataReader reader = comando.ExecuteReader())
+                using (var comando = new MySqlCommand(query, conexao))
                 {
-                    while (reader.Read())
+                    comando.Parameters.AddWithValue("@idMatricula", idMatricula);
+
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
                     {
-                        lista.Add(new Nota
+                        while (reader.Read())
                         {
-                            AlunoId = Convert.ToInt32(reader["alunoId"]),
-                            DisciplinaId = Convert.ToInt32(reader["disciplinaId"]),
-                            ValorNota = Convert.ToDouble(reader["valorNota"])
-                        });
+                            notas.Add(new Nota
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                IdMatricula = Convert.ToInt32(reader["Id_Matricula"]),
+                                Tipo = reader["Tipo"].ToString(),
+                                Valor = Convert.ToDecimal(reader["Valor"]),
+                                DataLancamento = Convert.ToDateTime(reader["Data_Lancamento"])
+                            });
+                        }
                     }
                 }
             }
-            return lista;
+            return notas;
         }
     }
 }

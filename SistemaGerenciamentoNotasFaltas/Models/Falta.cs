@@ -6,8 +6,9 @@ namespace SistemaGerenciamentoNotasFaltas.Models
 {
     internal class Falta
     {
-        public int AlunoId { get; set; }
-        public int DisciplinaId { get; set; }
+        public int Id { get; set; }
+        public int IdMatricula { get; set; }
         public DateTime DataFalta { get; set; }
+        public int Quantidade { get; set; }
     }
 }

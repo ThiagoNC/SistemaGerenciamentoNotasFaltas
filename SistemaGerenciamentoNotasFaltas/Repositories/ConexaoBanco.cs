@@ -9,9 +9,6 @@ namespace SistemaGerenciamentoNotasFaltas.Repositories
     {
         private readonly string stringConexao = "Server=localhost;Database=SistemaBarbearia;Uid=root;Pwd=1234;";
 
-        public MySqlConnection GetConexao()
-        {
-            return new MySqlConnection(stringConexao);
-        }
+        public MySqlConnection GetConexao() => new MySqlConnection(stringConexao);
     }
 }
