@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EduSmart.Models
 {
-    internal class Professor
+    public class Professor
     {
         public int Id { get; set; }
         public string Nome { get; set; }

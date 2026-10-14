@@ -7,7 +7,7 @@ namespace EduSmart.Repositories
 {
     internal class ConexaoBanco
     {
-        private readonly string stringConexao = "Server=localhost;Database=SistemaBarbearia;Uid=root;Pwd=1234;";
+        private readonly string stringConexao = "Server=localhost;Database=edusmart;Uid=root;Pwd=1234;";
 
         public MySqlConnection GetConexao() => new MySqlConnection(stringConexao);
     }
