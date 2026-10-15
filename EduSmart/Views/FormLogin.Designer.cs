@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             pcImagem = new PictureBox();
             lblEmail = new Label();
             txtEmail = new TextBox();
@@ -39,10 +40,13 @@
             pcOlho = new PictureBox();
             pcSenha = new PictureBox();
             pcUsuario = new PictureBox();
+            pnEduSmart = new Panel();
+            lblVersao = new Label();
             ((System.ComponentModel.ISupportInitialize)pcImagem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcOlho).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcSenha).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcUsuario).BeginInit();
+            pnEduSmart.SuspendLayout();
             SuspendLayout();
             // 
             // pcImagem
@@ -60,37 +64,37 @@
             // 
             lblEmail.AutoSize = true;
             lblEmail.ForeColor = Color.DimGray;
-            lblEmail.Location = new Point(80, 235);
+            lblEmail.Location = new Point(82, 231);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(44, 15);
-            lblEmail.TabIndex = 1;
+            lblEmail.TabIndex = 0;
             lblEmail.Text = "E-mail:";
             // 
             // txtEmail
             // 
             txtEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtEmail.Location = new Point(139, 228);
+            txtEmail.Location = new Point(139, 223);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(250, 29);
-            txtEmail.TabIndex = 2;
+            txtEmail.TabIndex = 1;
             // 
             // txtSenha
             // 
             txtSenha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSenha.Location = new Point(139, 263);
+            txtSenha.Location = new Point(139, 258);
             txtSenha.Name = "txtSenha";
             txtSenha.PasswordChar = '*';
             txtSenha.Size = new Size(250, 29);
-            txtSenha.TabIndex = 4;
+            txtSenha.TabIndex = 3;
             // 
             // lblSenha
             // 
             lblSenha.AutoSize = true;
             lblSenha.ForeColor = Color.DimGray;
-            lblSenha.Location = new Point(80, 270);
+            lblSenha.Location = new Point(82, 266);
             lblSenha.Name = "lblSenha";
             lblSenha.Size = new Size(42, 15);
-            lblSenha.TabIndex = 3;
+            lblSenha.TabIndex = 2;
             lblSenha.Text = "Senha:";
             // 
             // lklEsqueciSenha
@@ -99,7 +103,7 @@
             lklEsqueciSenha.Location = new Point(271, 295);
             lklEsqueciSenha.Name = "lklEsqueciSenha";
             lklEsqueciSenha.Size = new Size(118, 15);
-            lklEsqueciSenha.TabIndex = 7;
+            lklEsqueciSenha.TabIndex = 6;
             lklEsqueciSenha.TabStop = true;
             lklEsqueciSenha.Text = "Esqueci minha senha";
             lklEsqueciSenha.LinkClicked += lklEsqueciSenha_LinkClicked;
@@ -107,13 +111,14 @@
             // btnEntrar
             // 
             btnEntrar.BackColor = Color.LightSeaGreen;
+            btnEntrar.FlatAppearance.BorderColor = Color.LightSeaGreen;
             btnEntrar.FlatStyle = FlatStyle.Flat;
             btnEntrar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEntrar.ForeColor = Color.White;
-            btnEntrar.Location = new Point(45, 326);
+            btnEntrar.Location = new Point(45, 324);
             btnEntrar.Name = "btnEntrar";
             btnEntrar.Size = new Size(238, 45);
-            btnEntrar.TabIndex = 8;
+            btnEntrar.TabIndex = 4;
             btnEntrar.Text = "ENTRAR";
             btnEntrar.UseVisualStyleBackColor = false;
             btnEntrar.Click += btnEntrar_Click;
@@ -121,12 +126,13 @@
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.LightGray;
+            btnCancelar.FlatAppearance.BorderColor = Color.LightGray;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.ForeColor = Color.Black;
-            btnCancelar.Location = new Point(289, 326);
+            btnCancelar.Location = new Point(289, 324);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(100, 45);
-            btnCancelar.TabIndex = 9;
+            btnCancelar.TabIndex = 5;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
@@ -134,7 +140,7 @@
             // pcOlho
             // 
             pcOlho.Image = Properties.Resources.olho;
-            pcOlho.Location = new Point(360, 264);
+            pcOlho.Location = new Point(360, 259);
             pcOlho.Name = "pcOlho";
             pcOlho.Size = new Size(28, 26);
             pcOlho.SizeMode = PictureBoxSizeMode.Zoom;
@@ -145,7 +151,7 @@
             // pcSenha
             // 
             pcSenha.Image = Properties.Resources.senha;
-            pcSenha.Location = new Point(45, 263);
+            pcSenha.Location = new Point(45, 258);
             pcSenha.Name = "pcSenha";
             pcSenha.Size = new Size(29, 29);
             pcSenha.SizeMode = PictureBoxSizeMode.Zoom;
@@ -155,12 +161,32 @@
             // pcUsuario
             // 
             pcUsuario.Image = Properties.Resources.usuario;
-            pcUsuario.Location = new Point(45, 228);
+            pcUsuario.Location = new Point(45, 223);
             pcUsuario.Name = "pcUsuario";
             pcUsuario.Size = new Size(29, 29);
             pcUsuario.SizeMode = PictureBoxSizeMode.Zoom;
             pcUsuario.TabIndex = 5;
             pcUsuario.TabStop = false;
+            // 
+            // pnEduSmart
+            // 
+            pnEduSmart.BackColor = Color.White;
+            pnEduSmart.Controls.Add(lblVersao);
+            pnEduSmart.Dock = DockStyle.Bottom;
+            pnEduSmart.Location = new Point(0, 386);
+            pnEduSmart.Name = "pnEduSmart";
+            pnEduSmart.Size = new Size(434, 25);
+            pnEduSmart.TabIndex = 11;
+            // 
+            // lblVersao
+            // 
+            lblVersao.AutoSize = true;
+            lblVersao.ForeColor = Color.DimGray;
+            lblVersao.Location = new Point(176, 5);
+            lblVersao.Name = "lblVersao";
+            lblVersao.Size = new Size(82, 15);
+            lblVersao.TabIndex = 12;
+            lblVersao.Text = "EduSmart v1.0";
             // 
             // FormLogin
             // 
@@ -170,6 +196,7 @@
             BackColor = Color.WhiteSmoke;
             CancelButton = btnCancelar;
             ClientSize = new Size(434, 411);
+            Controls.Add(pnEduSmart);
             Controls.Add(pcOlho);
             Controls.Add(btnCancelar);
             Controls.Add(btnEntrar);
@@ -181,7 +208,10 @@
             Controls.Add(txtEmail);
             Controls.Add(lblEmail);
             Controls.Add(pcImagem);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FormLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login - EduSmart";
@@ -190,6 +220,8 @@
             ((System.ComponentModel.ISupportInitialize)pcOlho).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcSenha).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcUsuario).EndInit();
+            pnEduSmart.ResumeLayout(false);
+            pnEduSmart.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -207,5 +239,7 @@
         private PictureBox pcOlho;
         private PictureBox pcSenha;
         private PictureBox pcUsuario;
+        private Panel pnEduSmart;
+        private Label lblVersao;
     }
 }
