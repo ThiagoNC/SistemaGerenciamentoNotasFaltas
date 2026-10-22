@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
-            pcImagem = new PictureBox();
+            pbImagem = new PictureBox();
             lblEmail = new Label();
             txtEmail = new TextBox();
             txtSenha = new TextBox();
@@ -37,28 +37,29 @@
             lklEsqueciSenha = new LinkLabel();
             btnEntrar = new Button();
             btnCancelar = new Button();
-            pcOlho = new PictureBox();
-            pcSenha = new PictureBox();
-            pcUsuario = new PictureBox();
+            pbOlho = new PictureBox();
+            pbSenha = new PictureBox();
+            pbUsuario = new PictureBox();
             pnEduSmart = new Panel();
             lblVersao = new Label();
-            ((System.ComponentModel.ISupportInitialize)pcImagem).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pcOlho).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pcSenha).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pcUsuario).BeginInit();
+            pnCor = new Panel();
+            ((System.ComponentModel.ISupportInitialize)pbImagem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbOlho).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbSenha).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbUsuario).BeginInit();
             pnEduSmart.SuspendLayout();
             SuspendLayout();
             // 
-            // pcImagem
+            // pbImagem
             // 
-            pcImagem.BackColor = Color.Transparent;
-            pcImagem.Image = Properties.Resources.Logo;
-            pcImagem.Location = new Point(0, 1);
-            pcImagem.Name = "pcImagem";
-            pcImagem.Size = new Size(434, 256);
-            pcImagem.SizeMode = PictureBoxSizeMode.Zoom;
-            pcImagem.TabIndex = 0;
-            pcImagem.TabStop = false;
+            pbImagem.BackColor = Color.Transparent;
+            pbImagem.Image = Properties.Resources.Logo;
+            pbImagem.Location = new Point(0, 1);
+            pbImagem.Name = "pbImagem";
+            pbImagem.Size = new Size(434, 256);
+            pbImagem.SizeMode = PictureBoxSizeMode.Zoom;
+            pbImagem.TabIndex = 0;
+            pbImagem.TabStop = false;
             // 
             // lblEmail
             // 
@@ -137,36 +138,36 @@
             btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
-            // pcOlho
+            // pbOlho
             // 
-            pcOlho.Image = Properties.Resources.olho;
-            pcOlho.Location = new Point(360, 259);
-            pcOlho.Name = "pcOlho";
-            pcOlho.Size = new Size(28, 26);
-            pcOlho.SizeMode = PictureBoxSizeMode.Zoom;
-            pcOlho.TabIndex = 10;
-            pcOlho.TabStop = false;
-            pcOlho.Click += pcOlho_Click;
+            pbOlho.Image = Properties.Resources.olho;
+            pbOlho.Location = new Point(360, 259);
+            pbOlho.Name = "pbOlho";
+            pbOlho.Size = new Size(28, 26);
+            pbOlho.SizeMode = PictureBoxSizeMode.Zoom;
+            pbOlho.TabIndex = 10;
+            pbOlho.TabStop = false;
+            pbOlho.Click += pcOlho_Click;
             // 
-            // pcSenha
+            // pbSenha
             // 
-            pcSenha.Image = Properties.Resources.senha;
-            pcSenha.Location = new Point(45, 258);
-            pcSenha.Name = "pcSenha";
-            pcSenha.Size = new Size(29, 29);
-            pcSenha.SizeMode = PictureBoxSizeMode.Zoom;
-            pcSenha.TabIndex = 6;
-            pcSenha.TabStop = false;
+            pbSenha.Image = Properties.Resources.senha;
+            pbSenha.Location = new Point(45, 258);
+            pbSenha.Name = "pbSenha";
+            pbSenha.Size = new Size(29, 29);
+            pbSenha.SizeMode = PictureBoxSizeMode.Zoom;
+            pbSenha.TabIndex = 6;
+            pbSenha.TabStop = false;
             // 
-            // pcUsuario
+            // pbUsuario
             // 
-            pcUsuario.Image = Properties.Resources.usuario;
-            pcUsuario.Location = new Point(45, 223);
-            pcUsuario.Name = "pcUsuario";
-            pcUsuario.Size = new Size(29, 29);
-            pcUsuario.SizeMode = PictureBoxSizeMode.Zoom;
-            pcUsuario.TabIndex = 5;
-            pcUsuario.TabStop = false;
+            pbUsuario.Image = Properties.Resources.usuario;
+            pbUsuario.Location = new Point(45, 223);
+            pbUsuario.Name = "pbUsuario";
+            pbUsuario.Size = new Size(29, 29);
+            pbUsuario.SizeMode = PictureBoxSizeMode.Zoom;
+            pbUsuario.TabIndex = 5;
+            pbUsuario.TabStop = false;
             // 
             // pnEduSmart
             // 
@@ -188,6 +189,13 @@
             lblVersao.TabIndex = 12;
             lblVersao.Text = "EduSmart v1.0";
             // 
+            // pnCor
+            // 
+            pnCor.Location = new Point(0, 0);
+            pnCor.Name = "pnCor";
+            pnCor.Size = new Size(434, 76);
+            pnCor.TabIndex = 12;
+            // 
             // FormLogin
             // 
             AcceptButton = btnEntrar;
@@ -196,18 +204,19 @@
             BackColor = Color.WhiteSmoke;
             CancelButton = btnCancelar;
             ClientSize = new Size(434, 411);
+            Controls.Add(pnCor);
             Controls.Add(pnEduSmart);
-            Controls.Add(pcOlho);
+            Controls.Add(pbOlho);
             Controls.Add(btnCancelar);
             Controls.Add(btnEntrar);
             Controls.Add(lklEsqueciSenha);
-            Controls.Add(pcSenha);
-            Controls.Add(pcUsuario);
+            Controls.Add(pbSenha);
+            Controls.Add(pbUsuario);
             Controls.Add(txtSenha);
             Controls.Add(lblSenha);
             Controls.Add(txtEmail);
             Controls.Add(lblEmail);
-            Controls.Add(pcImagem);
+            Controls.Add(pbImagem);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -216,10 +225,10 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login - EduSmart";
             FormClosing += FormLogin_FormClosing;
-            ((System.ComponentModel.ISupportInitialize)pcImagem).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pcOlho).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pcSenha).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pcUsuario).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbImagem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbOlho).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbSenha).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbUsuario).EndInit();
             pnEduSmart.ResumeLayout(false);
             pnEduSmart.PerformLayout();
             ResumeLayout(false);
@@ -228,7 +237,7 @@
 
         #endregion
 
-        private PictureBox pcImagem;
+        private PictureBox pbImagem;
         private Label lblEmail;
         private TextBox txtEmail;
         private TextBox txtSenha;
@@ -236,10 +245,11 @@
         private LinkLabel lklEsqueciSenha;
         private Button btnEntrar;
         private Button btnCancelar;
-        private PictureBox pcOlho;
-        private PictureBox pcSenha;
-        private PictureBox pcUsuario;
+        private PictureBox pbOlho;
+        private PictureBox pbSenha;
+        private PictureBox pbUsuario;
         private Panel pnEduSmart;
         private Label lblVersao;
+        private Panel pnCor;
     }
 }
