@@ -34,7 +34,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "UPDATE Aluno SET ra = @ra, nome = @nome, email = @email WHERE id = @id";
+                string query = "UPDATE Aluno SET ra=@ra, nome=@nome, email=@email WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -53,7 +53,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "DELETE FROM Aluno WHERE id = @id";
+                string query = "DELETE FROM Aluno WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -71,7 +71,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Ra, Nome, Email FROM Aluno WHERE id = @id";
+                string query = "SELECT id, ra, nome, email FROM Aluno WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -84,10 +84,10 @@ namespace EduSmart.Repositories
                         {
                             aluno = new Aluno
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Ra = reader["Ra"].ToString(),
-                                Nome = reader["Nome"].ToString(),
-                                Email = reader["Email"].ToString()
+                                Id = Convert.ToInt32(reader["id"]),
+                                Ra = reader["ra"].ToString(),
+                                Nome = reader["nome"].ToString(),
+                                Email = reader["email"].ToString()
                             };
                         }
                     }
@@ -103,7 +103,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Ra, Nome, Email FROM Aluno WHERE Nome LIKE @nome";
+                string query = "SELECT id, ra, nome, email FROM Aluno WHERE nome LIKE @nome";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -116,10 +116,10 @@ namespace EduSmart.Repositories
                         {
                             alunos.Add(new Aluno
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Ra = reader["Ra"].ToString(),
-                                Nome = reader["Nome"].ToString(),
-                                Email = reader["Email"].ToString()
+                                Id = Convert.ToInt32(reader["id"]),
+                                Ra = reader["ra"].ToString(),
+                                Nome = reader["nome"].ToString(),
+                                Email = reader["email"].ToString()
                             });
                         }
                     }
@@ -134,7 +134,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Ra, Nome, Email FROM Aluno";
+                string query = "SELECT id, ra, nome, email FROM Aluno";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -145,10 +145,10 @@ namespace EduSmart.Repositories
                         {
                             alunos.Add(new Aluno
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Ra = reader["Ra"].ToString(),
-                                Nome = reader["Nome"].ToString(),
-                                Email = reader["Email"].ToString()
+                                Id = Convert.ToInt32(reader["id"]),
+                                Ra = reader["ra"].ToString(),
+                                Nome = reader["nome"].ToString(),
+                                Email = reader["email"].ToString()
                             });
                         }
                     }

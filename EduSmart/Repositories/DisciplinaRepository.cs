@@ -16,7 +16,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "INSERT INTO Disciplina (nome, carga_horaria) VALUES (@nome, @cargaHoraria)";
+                string query = "INSERT INTO Disciplina (nome, cargaHoraria) VALUES (@nome, @cargaHoraria)";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -33,7 +33,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "UPDATE Disciplina SET nome = @nome, carga_horaria = @cargaHoraria WHERE id = @id";
+                string query = "UPDATE Disciplina SET nome=@nome, cargaHoraria=@cargaHoraria WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -51,7 +51,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "DELETE FROM Disciplina WHERE id = @id";
+                string query = "DELETE FROM Disciplina WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -69,7 +69,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Nome, Carga_Horaria FROM Disciplina WHERE id = @id";
+                string query = "SELECT id, nome, cargaHoraria FROM Disciplina WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -82,9 +82,9 @@ namespace EduSmart.Repositories
                         {
                             disciplina = new Disciplina
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Nome = reader["Nome"].ToString(),
-                                CargaHoraria = Convert.ToInt32(reader["Carga_Horaria"])
+                                Id = Convert.ToInt32(reader["id"]),
+                                Nome = reader["nome"].ToString(),
+                                CargaHoraria = Convert.ToInt32(reader["cargaHoraria"])
                             };
                         }
                     }
@@ -100,7 +100,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Nome, CargaHoraria FROM Disciplina WHERE Nome LIKE @nome";
+                string query = "SELECT id, nome, cargaHoraria FROM Disciplina WHERE nome LIKE @nome";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -113,9 +113,9 @@ namespace EduSmart.Repositories
                         {
                             disciplinas.Add(new Disciplina
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Nome = reader["Nome"].ToString(),
-                                CargaHoraria = Convert.ToInt32(reader["CargaHoraria"])
+                                Id = Convert.ToInt32(reader["id"]),
+                                Nome = reader["nome"].ToString(),
+                                CargaHoraria = Convert.ToInt32(reader["cargaHoraria"])
                             });
                         }
                     }
@@ -130,7 +130,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Nome, Carga_Horaria FROM Disciplina";
+                string query = "SELECT id, nome, cargaHoraria FROM Disciplina";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -141,9 +141,9 @@ namespace EduSmart.Repositories
                         {
                             disciplinas.Add(new Disciplina
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Nome = reader["Nome"].ToString(),
-                                CargaHoraria = Convert.ToInt32(reader["Carga_Horaria"])
+                                Id = Convert.ToInt32(reader["id"]),
+                                Nome = reader["nome"].ToString(),
+                                CargaHoraria = Convert.ToInt32(reader["cargaHoraria"])
                             });
                         }
                     }

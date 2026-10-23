@@ -16,7 +16,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "INSERT INTO Nota (id_matricula, tipo, valor, data_lancamento) VALUES (@idMatricula, @tipo, @valor, @dataLancamento)";
+                string query = "INSERT INTO Nota (idMatricula, tipo, valor, dataLancamento) VALUES (@idMatricula, @tipo, @valor, @dataLancamento)";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -35,7 +35,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "UPDATE Nota SET id_matricula = @idMatricula, tipo = @tipo, valor = @valor, data_lancamento = @dataLancamento WHERE id = @id";
+                string query = "UPDATE Nota SET idMatricula=@idMatricula, tipo=@tipo, valor=@valor, dataLancamento=@dataLancamento WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -55,7 +55,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "DELETE FROM Nota WHERE id = @id";
+                string query = "DELETE FROM Nota WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -73,7 +73,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Id_Matricula, Tipo, Valor, Data_Lancamento FROM Nota WHERE id = @id";
+                string query = "SELECT id, idMatricula, tipo, valor, dataLancamento FROM Nota WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -86,11 +86,11 @@ namespace EduSmart.Repositories
                         {
                             nota = new Nota
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                IdMatricula = Convert.ToInt32(reader["Id_Matricula"]),
-                                Tipo = reader["Tipo"].ToString(),
-                                Valor = Convert.ToDecimal(reader["Valor"]),
-                                DataLancamento = Convert.ToDateTime(reader["Data_Lancamento"])
+                                Id = Convert.ToInt32(reader["id"]),
+                                IdMatricula = Convert.ToInt32(reader["idMatricula"]),
+                                Tipo = reader["tipo"].ToString(),
+                                Valor = Convert.ToDecimal(reader["valor"]),
+                                DataLancamento = Convert.ToDateTime(reader["dataLancamento"])
                             };
                         }
                     }
@@ -153,7 +153,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Id_Matricula, Tipo, Valor, Data_Lancamento FROM Nota WHERE id_matricula = @idMatricula";
+                string query = "SELECT id, idMatricula, tipo, valor, dataLancamento FROM Nota WHERE idMatricula=@idMatricula";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -166,11 +166,11 @@ namespace EduSmart.Repositories
                         {
                             notas.Add(new Nota
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                IdMatricula = Convert.ToInt32(reader["Id_Matricula"]),
-                                Tipo = reader["Tipo"].ToString(),
-                                Valor = Convert.ToDecimal(reader["Valor"]),
-                                DataLancamento = Convert.ToDateTime(reader["Data_Lancamento"])
+                                Id = Convert.ToInt32(reader["id"]),
+                                IdMatricula = Convert.ToInt32(reader["idMatricula"]),
+                                Tipo = reader["tipo"].ToString(),
+                                Valor = Convert.ToDecimal(reader["valor"]),
+                                DataLancamento = Convert.ToDateTime(reader["dataLancamento"])
                             });
                         }
                     }

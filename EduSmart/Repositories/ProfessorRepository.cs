@@ -16,7 +16,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "INSERT INTO Professor (nome, email, senha_hash) VALUES (@nome, @email, @senhaHash)";
+                string query = "INSERT INTO Professor (nome, email, senhaHash) VALUES (@nome, @email, @senhaHash)";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -34,7 +34,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "UPDATE Professor SET nome = @nome, email = @email, senha_hash = @senhaHash WHERE id = @id";
+                string query = "UPDATE Professor SET nome=@nome, email=@email, senhaHash=@senhaHash WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -53,7 +53,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "DELETE FROM Professor WHERE id = @id";
+                string query = "DELETE FROM Professor WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -71,7 +71,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Nome, Email, Senha_Hash FROM Professor WHERE id = @id";
+                string query = "SELECT id, nome, email, senhaHash FROM Professor WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -84,10 +84,10 @@ namespace EduSmart.Repositories
                         {
                             professor = new Professor
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Nome = reader["Nome"].ToString(),
-                                Email = reader["Email"].ToString(),
-                                SenhaHash = reader["Senha_Hash"].ToString()
+                                Id = Convert.ToInt32(reader["id"]),
+                                Nome = reader["nome"].ToString(),
+                                Email = reader["email"].ToString(),
+                                SenhaHash = reader["senhaHash"].ToString()
                             };
                         }
                     }
@@ -103,7 +103,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Nome, Email FROM Professor WHERE Nome LIKE @nome";
+                string query = "SELECT id, nome, email FROM Professor WHERE nome LIKE @nome";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -116,9 +116,9 @@ namespace EduSmart.Repositories
                         {
                             professores.Add(new Professor
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Nome = reader["Nome"].ToString(),
-                                Email = reader["Email"].ToString()
+                                Id = Convert.ToInt32(reader["id"]),
+                                Nome = reader["nome"].ToString(),
+                                Email = reader["email"].ToString()
                             });
                         }
                     }
@@ -133,7 +133,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Nome, Email, Senha_Hash FROM Professor";
+                string query = "SELECT id, nome, email, senhaHash FROM Professor";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -144,10 +144,10 @@ namespace EduSmart.Repositories
                         {
                             professores.Add(new Professor
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Nome = reader["Nome"].ToString(),
-                                Email = reader["Email"].ToString(),
-                                SenhaHash = reader["Senha_Hash"].ToString()
+                                Id = Convert.ToInt32(reader["id"]),
+                                Nome = reader["nome"].ToString(),
+                                Email = reader["email"].ToString(),
+                                SenhaHash = reader["senhaHash"].ToString()
                             });
                         }
                     }
@@ -162,7 +162,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT Id, Nome, Email, Senha_Hash FROM Professor WHERE email = @email";
+                string query = "SELECT id, nome, email, senhaHash FROM Professor WHERE email=@email";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -175,10 +175,10 @@ namespace EduSmart.Repositories
                         {
                             professor = new Professor
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Nome = reader["Nome"].ToString(),
-                                Email = reader["Email"].ToString(),
-                                SenhaHash = reader["Senha_Hash"].ToString()
+                                Id = Convert.ToInt32(reader["id"]),
+                                Nome = reader["nome"].ToString(),
+                                Email = reader["email"].ToString(),
+                                SenhaHash = reader["senhaHash"].ToString()
                             };
                         }
                     }

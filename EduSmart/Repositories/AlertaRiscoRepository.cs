@@ -16,12 +16,12 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "INSERT INTO Alerta_Risco (id_matricula, nivel_risco, justificativa_ia, data_analise) VALUES (@idMatricula, @nivelRisco, @justificativaIa, @dataAnalise)";
+                string query = "INSERT INTO AlertaRisco (idMatricula, nivelRisco, justificativaIa, dataAnalise) VALUES (@idMatricula, @nivelRisco, @justificativaIa, @dataAnalise)";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
                     comando.Parameters.AddWithValue("@idMatricula", alerta.IdMatricula);
-                    comando.Parameters.AddWithValue("@nivelRisco", alerta.NivelRisco.ToString()); // Converte o Enum para texto
+                    comando.Parameters.AddWithValue("@nivelRisco", alerta.NivelRisco.ToString());
                     comando.Parameters.AddWithValue("@justificativaIa", alerta.JustificativaIa);
                     comando.Parameters.AddWithValue("@dataAnalise", alerta.DataAnalise == DateTime.MinValue ? DateTime.Now : alerta.DataAnalise);
 
@@ -35,7 +35,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "UPDATE Alerta_Risco SET id_matricula = @idMatricula, nivel_risco = @nivelRisco, justificativa_ia = @justificativaIa, data_analise = @dataAnalise WHERE id = @id";
+                string query = "UPDATE AlertaRisco SET idMatricula=@idMatricula, nivelRisco=@nivelRisco, justificativaIa=@justificativaIa, dataAnalise=@dataAnalise WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -55,7 +55,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "DELETE FROM Alerta_Risco WHERE id = @id";
+                string query = "DELETE FROM AlertaRisco WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -73,7 +73,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT id, id_matricula, nivel_risco, justificativa_ia, data_analise FROM Alerta_Risco WHERE id = @id";
+                string query = "SELECT id, idMatricula, nivelRisco, justificativaIa, dataAnalise FROM AlertaRisco WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -87,10 +87,10 @@ namespace EduSmart.Repositories
                             alerta = new AlertaRisco
                             {
                                 Id = Convert.ToInt32(reader["id"]),
-                                IdMatricula = Convert.ToInt32(reader["id_matricula"]),
-                                NivelRisco = (NivelRisco)Enum.Parse(typeof(NivelRisco), reader["nivel_risco"].ToString()), // Converte o texto do banco de volta para o Enum
-                                JustificativaIa = reader["justificativa_ia"].ToString(),
-                                DataAnalise = Convert.ToDateTime(reader["data_analise"])
+                                IdMatricula = Convert.ToInt32(reader["idMatricula"]),
+                                NivelRisco = (NivelRisco)Enum.Parse(typeof(NivelRisco), reader["nivelRisco"].ToString()),
+                                JustificativaIa = reader["justificativaIa"].ToString(),
+                                DataAnalise = Convert.ToDateTime(reader["dataAnalise"])
                             };
                         }
                     }
@@ -108,11 +108,11 @@ namespace EduSmart.Repositories
             {
                 string query = @"
                 SELECT 
-                    ar.Id, 
-                    ar.IdMatricula, 
-                    ar.NivelRisco,
-                    ar.JustificativaIa,
-                    ar.DataAnalise,
+                    ar.id, 
+                    ar.idMatricula, 
+                    ar.nivelRisco,
+                    ar.justificativaIa,
+                    ar.dataAnalise,
                     a.Nome AS NomeAluno, 
                     d.Nome AS NomeDisciplina
                 FROM AlertaRisco ar
@@ -153,7 +153,7 @@ namespace EduSmart.Repositories
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "SELECT id, id_matricula, nivel_risco, justificativa_ia, data_analise FROM Alerta_Risco WHERE id_matricula = @idMatricula ORDER BY data_analise DESC";
+                string query = "SELECT id, idMatricula, nivelRisco, justificativaIa, dataAnalise FROM AlertaRisco WHERE idMatricula=@idMatricula ORDER BY dataAnalise DESC";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -167,10 +167,10 @@ namespace EduSmart.Repositories
                             alertas.Add(new AlertaRisco
                             {
                                 Id = Convert.ToInt32(reader["id"]),
-                                IdMatricula = Convert.ToInt32(reader["id_matricula"]),
-                                NivelRisco = (NivelRisco)Enum.Parse(typeof(NivelRisco), reader["nivel_risco"].ToString()),
-                                JustificativaIa = reader["justificativa_ia"].ToString(),
-                                DataAnalise = Convert.ToDateTime(reader["data_analise"])
+                                IdMatricula = Convert.ToInt32(reader["idMatricula"]),
+                                NivelRisco = (NivelRisco)Enum.Parse(typeof(NivelRisco), reader["nivelRisco"].ToString()),
+                                JustificativaIa = reader["justificativaIa"].ToString(),
+                                DataAnalise = Convert.ToDateTime(reader["dataAnalise"])
                             });
                         }
                     }

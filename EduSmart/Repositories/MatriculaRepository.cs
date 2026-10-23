@@ -16,7 +16,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "INSERT INTO Matricula (id_aluno, id_disciplina, id_professor, semestre) VALUES (@idAluno, @idDisciplina, @idProfessor, @semestre)";
+                string query = "INSERT INTO Matricula (idAluno, idDisciplina, idProfessor, semestre) VALUES (@idAluno, @idDisciplina, @idProfessor, @semestre)";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -35,7 +35,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "UPDATE Matricula SET id_aluno = @idAluno, id_disciplina = @idDisciplina, id_professor = @idProfessor, semestre = @semestre WHERE id = @id";
+                string query = "UPDATE Matricula SET idAluno=@idAluno, idDisciplina=@idDisciplina, idProfessor=@idProfessor, semestre=@semestre WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -55,7 +55,7 @@ namespace EduSmart.Repositories
         {
             using (var conexao = _conexaoBanco.GetConexao())
             {
-                string query = "DELETE FROM Matricula WHERE id = @id";
+                string query = "DELETE FROM Matricula WHERE id=@id";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -67,21 +67,26 @@ namespace EduSmart.Repositories
             }
         }
 
-        public Matricula ListarPorId(int id)
+        public Matricula BuscarPorId(int id)
         {
             Matricula matricula = null;
 
             using (var conexao = _conexaoBanco.GetConexao())
             {
                 string query = @"
-                SELECT m.id, m.id_aluno, m.id_disciplina, m.id_professor, m.semestre, 
-                       a.nome AS NomeAluno, a.ra AS RaAluno, 
-                       d.nome AS NomeDisciplina, 
-                       p.nome AS NomeProfessor
+                SELECT 
+                    m.id, 
+                    m.idAluno, 
+                    m.idDisciplina, 
+                    m.idProfessor,
+                    m.semestre,
+                    a.Nome AS NomeAluno, 
+                    d.Nome AS NomeDisciplina,
+                    p.Nome AS NomeProfessor
                 FROM Matricula m
-                INNER JOIN Aluno a ON m.id_aluno = a.id
-                INNER JOIN Disciplina d ON m.id_disciplina = d.id
-                INNER JOIN Professor p ON m.id_professor = p.id
+                INNER JOIN Aluno a ON m.idAluno = a.Id
+                INNER JOIN Disciplina d ON m.idDisciplina = d.Id
+                INNER JOIN Professor p ON m.idProfessor = p.Id
                 WHERE m.id = @id";
 
                 using (var comando = new MySqlCommand(query, conexao))
@@ -93,12 +98,21 @@ namespace EduSmart.Repositories
                     {
                         if (reader.Read())
                         {
-                            matricula = MapearMatriculaComJoin(reader);
+                            matricula = new Matricula
+                            {
+                                Id = Convert.ToInt32(reader["id"]),
+                                IdAluno = Convert.ToInt32(reader["idAluno"]),
+                                IdDisciplina = Convert.ToInt32(reader["idDisciplina"]),
+                                IdProfessor = Convert.ToInt32(reader["idProfessor"]),
+                                Semestre = reader["semestre"].ToString(),
+                                NomeAluno = reader["NomeAluno"].ToString(),
+                                NomeDisciplina = reader["NomeDisciplina"].ToString(),
+                                NomeProfessor = reader["NomeProfessor"].ToString()
+                            };
                         }
                     }
                 }
             }
-
             return matricula;
         }
 
@@ -135,11 +149,11 @@ namespace EduSmart.Repositories
                         {
                             matriculas.Add(new Matricula
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                IdAluno = Convert.ToInt32(reader["IdAluno"]),
-                                IdDisciplina = Convert.ToInt32(reader["IdDisciplina"]),
-                                IdProfessor = Convert.ToInt32(reader["IdProfessor"]),
-                                Semestre = reader["Semestre"].ToString(),
+                                Id = Convert.ToInt32(reader["id"]),
+                                IdAluno = Convert.ToInt32(reader["idAluno"]),
+                                IdDisciplina = Convert.ToInt32(reader["idDisciplina"]),
+                                IdProfessor = Convert.ToInt32(reader["idProfessor"]),
+                                Semestre = reader["semestre"].ToString(),
                                 NomeAluno = reader["NomeAluno"].ToString(),
                                 NomeDisciplina = reader["NomeDisciplina"].ToString(),
                                 NomeProfessor = reader["NomeProfessor"].ToString()
@@ -158,15 +172,15 @@ namespace EduSmart.Repositories
             using (var conexao = _conexaoBanco.GetConexao())
             {
                 string query = @"
-                SELECT m.id, m.id_aluno, m.id_disciplina, m.id_professor, m.semestre, 
+                SELECT m.id, m.idAluno, m.idDisciplina, m.idProfessor, m.semestre, 
                        a.nome AS NomeAluno, a.ra AS RaAluno, 
                        d.nome AS NomeDisciplina, 
                        p.nome AS NomeProfessor
                 FROM Matricula m
-                INNER JOIN Aluno a ON m.id_aluno = a.id
-                INNER JOIN Disciplina d ON m.id_disciplina = d.id
-                INNER JOIN Professor p ON m.id_professor = p.id
-                WHERE m.id_professor = @idProfessor";
+                INNER JOIN Aluno a ON m.idAluno = a.id
+                INNER JOIN Disciplina d ON m.idDisciplina = d.id
+                INNER JOIN Professor p ON m.idProfessor = p.id
+                WHERE m.idProfessor = @idProfessor";
 
                 using (var comando = new MySqlCommand(query, conexao))
                 {
@@ -183,35 +197,6 @@ namespace EduSmart.Repositories
                 }
             }
             return matriculas;
-        }
-
-        private Matricula MapearMatriculaComJoin(MySqlDataReader reader)
-        {
-            return new Matricula
-            {
-                Id = Convert.ToInt32(reader["id"]),
-                IdAluno = Convert.ToInt32(reader["id_aluno"]),
-                IdDisciplina = Convert.ToInt32(reader["id_disciplina"]),
-                IdProfessor = Convert.ToInt32(reader["id_professor"]),
-                Semestre = reader["semestre"].ToString(),
-
-                Aluno = new Aluno
-                {
-                    Id = Convert.ToInt32(reader["id_aluno"]),
-                    Nome = reader["NomeAluno"].ToString(),
-                    Ra = reader["RaAluno"].ToString()
-                },
-                Disciplina = new Disciplina
-                {
-                    Id = Convert.ToInt32(reader["id_disciplina"]),
-                    Nome = reader["NomeDisciplina"].ToString()
-                },
-                Professor = new Professor
-                {
-                    Id = Convert.ToInt32(reader["id_professor"]),
-                    Nome = reader["NomeProfessor"].ToString()
-                }
-            };
         }
     }
 }
