@@ -10,5 +10,8 @@ namespace EduSmart.Models
         public int IdMatricula { get; set; }
         public DateTime DataFalta { get; set; }
         public int Quantidade { get; set; }
+
+        public string NomeAluno { get; set; }
+        public string NomeDisciplina { get; set; }
     }
 }

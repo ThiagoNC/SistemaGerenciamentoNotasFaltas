@@ -94,6 +94,36 @@ namespace EduSmart.Repositories
             return disciplina;
         }
 
+        public List<Disciplina> ListarPorNome(string nome)
+        {
+            var disciplinas = new List<Disciplina>();
+
+            using (var conexao = _conexaoBanco.GetConexao())
+            {
+                string query = "SELECT Id, Nome, CargaHoraria FROM Disciplina WHERE Nome LIKE @nome";
+
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@nome", $"%{nome}%");
+
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            disciplinas.Add(new Disciplina
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Nome = reader["Nome"].ToString(),
+                                CargaHoraria = Convert.ToInt32(reader["CargaHoraria"])
+                            });
+                        }
+                    }
+                }
+            }
+            return disciplinas;
+        }
+
         public List<Disciplina> ListarTodos()
         {
             var disciplinas = new List<Disciplina>();

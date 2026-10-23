@@ -45,6 +45,8 @@ namespace EduSmart.Services
 
         public Falta ListarPorId(int id) => _faltaRepository.ListarPorId(id);
 
+        public List<Falta> ListarPorNomeAluno(string nomeAluno) => _faltaRepository.ListarPorNomeAluno(nomeAluno);
+
         public List<Falta> ListarPorMatricula(int idMatricula) => _faltaRepository.ListarPorMatricula(idMatricula);
     }
 }

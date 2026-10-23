@@ -101,7 +101,7 @@
             gbAluno.Controls.Add(txtRa);
             gbAluno.Controls.Add(lblRA);
             gbAluno.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            gbAluno.Location = new Point(10, 174);
+            gbAluno.Location = new Point(10, 180);
             gbAluno.Name = "gbAluno";
             gbAluno.Size = new Size(362, 325);
             gbAluno.TabIndex = 5;
@@ -162,6 +162,7 @@
             // 
             // txtEmail
             // 
+            txtEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtEmail.Location = new Point(164, 99);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(192, 29);
@@ -169,6 +170,7 @@
             // 
             // txtNome
             // 
+            txtNome.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtNome.Location = new Point(164, 64);
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(192, 29);
@@ -186,6 +188,7 @@
             // 
             // txtRa
             // 
+            txtRa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtRa.Location = new Point(164, 29);
             txtRa.Name = "txtRa";
             txtRa.Size = new Size(192, 29);
@@ -218,7 +221,7 @@
             dgvAlunos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvAlunos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAlunos.Columns.AddRange(new DataGridViewColumn[] { id, ra, nome, email });
-            dgvAlunos.Location = new Point(378, 203);
+            dgvAlunos.Location = new Point(378, 209);
             dgvAlunos.MultiSelect = false;
             dgvAlunos.Name = "dgvAlunos";
             dgvAlunos.ReadOnly = true;
@@ -243,12 +246,14 @@
             // 
             // nome
             // 
+            nome.DataPropertyName = "nome";
             nome.HeaderText = "Nome";
             nome.Name = "nome";
             nome.ReadOnly = true;
             // 
             // email
             // 
+            email.DataPropertyName = "email";
             email.HeaderText = "E-mail";
             email.Name = "email";
             email.ReadOnly = true;
@@ -256,7 +261,7 @@
             // txtPesquisar
             // 
             txtPesquisar.BackColor = SystemColors.Control;
-            txtPesquisar.Location = new Point(817, 174);
+            txtPesquisar.Location = new Point(817, 180);
             txtPesquisar.Name = "txtPesquisar";
             txtPesquisar.PlaceholderText = "Pesquisar aluno...";
             txtPesquisar.Size = new Size(150, 23);
@@ -268,7 +273,7 @@
             btnAtualizar.BackColor = Color.Transparent;
             btnAtualizar.FlatStyle = FlatStyle.Flat;
             btnAtualizar.Image = Properties.Resources.refresh1;
-            btnAtualizar.Location = new Point(973, 174);
+            btnAtualizar.Location = new Point(973, 180);
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.Size = new Size(23, 23);
             btnAtualizar.TabIndex = 70;

@@ -97,6 +97,36 @@ namespace EduSmart.Repositories
             return professor;
         }
 
+        public List<Professor> ListarPorNome(string nome)
+        {
+            var professores = new List<Professor>();
+
+            using (var conexao = _conexaoBanco.GetConexao())
+            {
+                string query = "SELECT Id, Nome, Email FROM Professor WHERE Nome LIKE @nome";
+
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@nome", $"%{nome}%");
+
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            professores.Add(new Professor
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Nome = reader["Nome"].ToString(),
+                                Email = reader["Email"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return professores;
+        }
+
         public List<Professor> ListarTodos()
         {
             var professores = new List<Professor>();

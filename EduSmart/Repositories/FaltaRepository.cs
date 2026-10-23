@@ -97,6 +97,51 @@ namespace EduSmart.Repositories
             return falta;
         }
 
+        public List<Falta> ListarPorNomeAluno(string nomeAluno)
+        {
+            var faltas = new List<Falta>();
+
+            using (var conexao = _conexaoBanco.GetConexao())
+            {
+                string query = @"
+                SELECT 
+                    f.Id, 
+                    f.IdMatricula, 
+                    f.DataFalta, 
+                    f.Quantidade,
+                    a.Nome AS NomeAluno, 
+                    d.Nome AS NomeDisciplina
+                FROM Falta f
+                INNER JOIN Matricula m ON f.IdMatricula = m.Id
+                INNER JOIN Aluno a ON m.IdAluno = a.Id
+                INNER JOIN Disciplina d ON m.IdDisciplina = d.Id
+                WHERE a.Nome LIKE @nome";
+
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@nome", $"%{nomeAluno}%");
+
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            faltas.Add(new Falta
+                            {
+                                Id = Convert.ToInt32(reader["id"]),
+                                IdMatricula = Convert.ToInt32(reader["idMatricula"]),
+                                DataFalta = Convert.ToDateTime(reader["dataFalta"]),
+                                Quantidade = Convert.ToInt32(reader["quantidade"]),
+                                NomeAluno = reader["NomeAluno"].ToString(),
+                                NomeDisciplina = reader["NomeDisciplina"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return faltas;
+        }
+
         public List<Falta> ListarPorMatricula(int idMatricula)
         {
             var faltas = new List<Falta>();

@@ -79,7 +79,7 @@ namespace EduSmart.Views
         {
             var service = new AlunoService();
 
-            //dgvAlunos.DataSource = service.ListarPorNome(txtPesquisar.Text).OrderBy(b => b.Nome).ToList();
+            dgvAlunos.DataSource = service.ListarPorNome(txtPesquisar.Text).OrderBy(b => b.Nome).ToList();
         }
 
         private void btnAtualizar_Click(object sender, EventArgs e)

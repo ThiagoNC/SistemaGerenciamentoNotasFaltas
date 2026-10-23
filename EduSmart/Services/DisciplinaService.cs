@@ -41,6 +41,8 @@ namespace EduSmart.Services
 
         public Disciplina ListarPorId(int id) => _disciplinaRepository.ListarPorId(id);
 
+        public List<Disciplina> ListarPorNome(string nome) => _disciplinaRepository.ListarPorNome(nome);
+
         public List<Disciplina> ListarTodos() => _disciplinaRepository.ListarTodos();
     }
 }

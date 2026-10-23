@@ -43,6 +43,8 @@ namespace EduSmart.Services
 
         public Professor ListarPorId(int id) => _professorRepository.ListarPorId(id);
 
+        public List<Professor> ListarPorNome(string nome) => _professorRepository.ListarPorNome(nome);
+
         public List<Professor> ListarTodos() => _professorRepository.ListarTodos();
 
         public Professor Autenticar(string email, string senha)

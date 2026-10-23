@@ -56,6 +56,8 @@ namespace EduSmart.Services
 
         public Matricula ListarPorId(int id) => _matriculaRepository.ListarPorId(id);
 
+        public List<Matricula> ListarPorNomeAluno(string nomeAluno) => _matriculaRepository.ListarPorNomeAluno(nomeAluno);
+
         public List<Matricula> ListarPorProfessor(int idProfessor) => _matriculaRepository.ListarPorProfessor(idProfessor);
 
         public decimal CalcularMedia(int idMatricula)

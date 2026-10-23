@@ -20,7 +20,10 @@ namespace EduSmart
             {
                 Professor professorLogado = _professorService.Autenticar(txtEmail.Text, txtSenha.Text);
 
-                var formPrincipal = new FormPrincipal(professorLogado);
+                //var formPrincipal = new FormPrincipal(professorLogado);
+                //formPrincipal.Show();
+
+                var formPrincipal = new FormProfessor();
                 formPrincipal.Show();
 
                 this.Hide();

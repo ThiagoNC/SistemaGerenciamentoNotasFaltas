@@ -47,6 +47,8 @@ namespace EduSmart.Services
 
         public AlertaRisco ListarPorId(int id) => _alertaRiscoRepository.ListarPorId(id);
 
+        public List<AlertaRisco> ListarPorNomeAluno(string nomeAluno) => _alertaRiscoRepository.ListarPorNomeAluno(nomeAluno);
+
         public List<AlertaRisco> ListarPorMatricula(int idMatricula) => _alertaRiscoRepository.ListarPorMatricula(idMatricula);
 
         public void GerarAlertaComIA(int idMatricula)

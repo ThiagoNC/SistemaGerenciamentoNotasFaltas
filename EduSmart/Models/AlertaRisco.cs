@@ -11,6 +11,9 @@ namespace EduSmart.Models
         public NivelRisco NivelRisco { get; set; }
         public string JustificativaIa { get; set; }
         public DateTime DataAnalise { get; set; }
+
+        public string NomeAluno { get; set; }
+        public string NomeDisciplina { get; set; }
     }
 
     internal enum NivelRisco

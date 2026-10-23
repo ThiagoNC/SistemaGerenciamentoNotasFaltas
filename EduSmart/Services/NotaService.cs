@@ -45,6 +45,8 @@ namespace EduSmart.Services
 
         public Nota ListarPorId(int id) => _notaRepository.ListarPorId(id);
 
+        public List<Nota> ListarPorNomeAluno(string nomeAluno) => _notaRepository.ListarPorNomeAluno(nomeAluno);
+
         public List<Nota> ListarPorMatricula(int idMatricula) => _notaRepository.ListarPorMatricula(idMatricula);
     }
 }

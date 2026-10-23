@@ -140,10 +140,12 @@
             // 
             // pbOlho
             // 
+            pbOlho.BackColor = Color.Transparent;
+            pbOlho.BorderStyle = BorderStyle.FixedSingle;
             pbOlho.Image = Properties.Resources.olho;
             pbOlho.Location = new Point(360, 259);
             pbOlho.Name = "pbOlho";
-            pbOlho.Size = new Size(28, 26);
+            pbOlho.Size = new Size(28, 28);
             pbOlho.SizeMode = PictureBoxSizeMode.Zoom;
             pbOlho.TabIndex = 10;
             pbOlho.TabStop = false;

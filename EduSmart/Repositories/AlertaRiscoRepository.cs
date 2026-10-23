@@ -100,6 +100,53 @@ namespace EduSmart.Repositories
             return alerta;
         }
 
+        public List<AlertaRisco> ListarPorNomeAluno(string nomeAluno)
+        {
+            var alertas = new List<AlertaRisco>();
+
+            using (var conexao = _conexaoBanco.GetConexao())
+            {
+                string query = @"
+                SELECT 
+                    ar.Id, 
+                    ar.IdMatricula, 
+                    ar.NivelRisco,
+                    ar.JustificativaIa,
+                    ar.DataAnalise,
+                    a.Nome AS NomeAluno, 
+                    d.Nome AS NomeDisciplina
+                FROM AlertaRisco ar
+                INNER JOIN Matricula m ON ar.IdMatricula = m.Id
+                INNER JOIN Aluno a ON m.IdAluno = a.Id
+                INNER JOIN Disciplina d ON m.IdDisciplina = d.Id
+                WHERE a.Nome LIKE @nome";
+
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@nome", $"%{nomeAluno}%");
+
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            alertas.Add(new AlertaRisco
+                            {
+                                Id = Convert.ToInt32(reader["id"]),
+                                IdMatricula = Convert.ToInt32(reader["idMatricula"]),
+                                NivelRisco = (NivelRisco)Enum.Parse(typeof(NivelRisco), reader["nivelRisco"].ToString()),
+                                JustificativaIa = reader["justificativaIa"].ToString(),
+                                DataAnalise = Convert.ToDateTime(reader["dataAnalise"]),
+                                NomeAluno = reader["NomeAluno"].ToString(),
+                                NomeDisciplina = reader["NomeDisciplina"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return alertas;
+        }
+
         public List<AlertaRisco> ListarPorMatricula(int idMatricula)
         {
             var alertas = new List<AlertaRisco>();

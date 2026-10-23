@@ -41,6 +41,8 @@ namespace EduSmart.Services
 
         public Aluno ListarPorId(int id) => _alunoRepository.ListarPorId(id);
 
+        public List<Aluno> ListarPorNome(string nome) => _alunoRepository.ListarPorNome(nome);
+
         public List<Aluno> ListarTodos() => _alunoRepository.ListarTodos();
     }
 }

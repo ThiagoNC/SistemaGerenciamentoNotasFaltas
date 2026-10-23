@@ -12,8 +12,8 @@ namespace EduSmart.Models
         public int IdProfessor { get; set; }
         public string Semestre { get; set; }
 
-        public Aluno Aluno { get; set; }
-        public Disciplina Disciplina { get; set; }
-        public Professor Professor { get; set; }
+        public string NomeAluno { get; set; }
+        public string NomeDisciplina { get; set; }
+        public string NomeProfessor { get; set; }
     }
 }

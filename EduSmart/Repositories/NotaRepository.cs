@@ -100,6 +100,53 @@ namespace EduSmart.Repositories
             return nota;
         }
 
+        public List<Nota> ListarPorNomeAluno(string nomeAluno)
+        {
+            var notas = new List<Nota>();
+
+            using (var conexao = _conexaoBanco.GetConexao())
+            {
+                string query = @"
+                SELECT 
+                    n.Id, 
+                    n.IdMatricula, 
+                    n.Tipo,
+                    n.Valor,
+                    n.DataLancamento,
+                    a.Nome AS NomeAluno, 
+                    d.Nome AS NomeDisciplina
+                FROM Nota n
+                INNER JOIN Matricula m ON n.IdMatricula = m.Id
+                INNER JOIN Aluno a ON m.IdAluno = a.Id
+                INNER JOIN Disciplina d ON m.IdDisciplina = d.Id
+                WHERE a.Nome LIKE @nome";
+
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@nome", $"%{nomeAluno}%");
+
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            notas.Add(new Nota
+                            {
+                                Id = Convert.ToInt32(reader["id"]),
+                                IdMatricula = Convert.ToInt32(reader["idMatricula"]),
+                                Tipo = reader["tipo"].ToString(),
+                                Valor = Convert.ToDecimal(reader["valor"]),
+                                DataLancamento = Convert.ToDateTime(reader["dataLancamento"]),
+                                NomeAluno = reader["NomeAluno"].ToString(),
+                                NomeDisciplina = reader["NomeDisciplina"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return notas;
+        }
+
         public List<Nota> ListarPorMatricula(int idMatricula)
         {
             var notas = new List<Nota>();
