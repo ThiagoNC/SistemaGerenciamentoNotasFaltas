@@ -56,6 +56,8 @@ namespace EduSmart.Services
 
         public Matricula ListarPorId(int id) => _matriculaRepository.ListarPorId(id);
 
+        public List<Matricula> ListarPorIdAluno(int idAluno) => _matriculaRepository.ListarPorIdAluno(idAluno);
+
         public List<Matricula> ListarPorNomeAluno(string nomeAluno) => _matriculaRepository.ListarPorNomeAluno(nomeAluno);
 
         public List<Matricula> ListarPorProfessor(int idProfessor) => _matriculaRepository.ListarPorProfessor(idProfessor);

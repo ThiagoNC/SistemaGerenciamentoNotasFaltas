@@ -18,7 +18,7 @@ namespace EduSmart.Views
             this.KeyPreview = true;
         }
 
-        private void FormMatriculas_Load(object sender, EventArgs e)
+        private void FormMatricula_Load(object sender, EventArgs e)
         {
             CarregarComboBoxes();
 
@@ -195,14 +195,14 @@ namespace EduSmart.Views
             MessageBox.Show("Lista atualizada!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void FormMatriculas_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormMatricula_FormClosing(object sender, FormClosingEventArgs e)
         {
             //this.Hide();
             //var form = new FormPrincipal();
             //form.ShowDialog();
         }
 
-        private void FormMatriculas_KeyDown(object sender, KeyEventArgs e)
+        private void FormMatricula_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {

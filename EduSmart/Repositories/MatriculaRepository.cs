@@ -116,6 +116,55 @@ namespace EduSmart.Repositories
             return matricula;
         }
 
+        public List<Matricula> ListarPorIdAluno(int idAluno)
+        {
+            var matriculas = new List<Matricula>();
+
+            using (var conexao = _conexaoBanco.GetConexao())
+            {
+                string query = @"
+                SELECT 
+                    m.id, 
+                    m.idAluno, 
+                    m.idDisciplina, 
+                    m.idProfessor,
+                    m.semestre,
+                    a.nome AS NomeAluno, 
+                    d.nome AS NomeDisciplina,
+                    p.nome AS NomeProfessor
+                FROM Matricula m
+                INNER JOIN Aluno a ON m.idAluno = a.id
+                INNER JOIN Disciplina d ON m.idDisciplina = d.id
+                INNER JOIN Professor p ON m.idProfessor = p.id
+                WHERE m.idAluno = @idAluno";
+
+                using (var comando = new MySqlCommand(query, conexao))
+                {
+                    comando.Parameters.AddWithValue("@idAluno", idAluno);
+
+                    conexao.Open();
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            matriculas.Add(new Matricula
+                            {
+                                Id = Convert.ToInt32(reader["id"]),
+                                IdAluno = Convert.ToInt32(reader["idAluno"]),
+                                IdDisciplina = Convert.ToInt32(reader["idDisciplina"]),
+                                IdProfessor = Convert.ToInt32(reader["idProfessor"]),
+                                Semestre = reader["semestre"].ToString(),
+                                NomeAluno = reader["NomeAluno"].ToString(),
+                                NomeDisciplina = reader["NomeDisciplina"].ToString(),
+                                NomeProfessor = reader["NomeProfessor"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return matriculas;
+        }
+
         public List<Matricula> ListarPorNomeAluno(string nomeAluno)
         {
             var matriculas = new List<Matricula>();

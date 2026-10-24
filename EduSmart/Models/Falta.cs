@@ -11,7 +11,9 @@ namespace EduSmart.Models
         public DateTime DataFalta { get; set; }
         public int Quantidade { get; set; }
 
+        public int IdAluno { get; set; }
         public string NomeAluno { get; set; }
         public string NomeDisciplina { get; set; }
+        public string NomeProfessor { get; set; }
     }
 }

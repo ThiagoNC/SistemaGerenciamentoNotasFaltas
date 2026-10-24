@@ -69,7 +69,7 @@
             pnMatricula.Location = new Point(0, 0);
             pnMatricula.Name = "pnMatricula";
             pnMatricula.Size = new Size(1008, 150);
-            pnMatricula.TabIndex = 26;
+            pnMatricula.TabIndex = 0;
             // 
             // pbMatricula
             // 
@@ -109,7 +109,7 @@
             gbMatricula.Location = new Point(10, 180);
             gbMatricula.Name = "gbMatricula";
             gbMatricula.Size = new Size(362, 325);
-            gbMatricula.TabIndex = 27;
+            gbMatricula.TabIndex = 2;
             gbMatricula.TabStop = false;
             gbMatricula.Text = "Informações da Matrícula";
             // 
@@ -119,7 +119,7 @@
             txtSemestre.Location = new Point(164, 134);
             txtSemestre.Name = "txtSemestre";
             txtSemestre.Size = new Size(192, 29);
-            txtSemestre.TabIndex = 24;
+            txtSemestre.TabIndex = 20;
             // 
             // cbProfessor
             // 
@@ -128,7 +128,7 @@
             cbProfessor.Location = new Point(164, 99);
             cbProfessor.Name = "cbProfessor";
             cbProfessor.Size = new Size(192, 29);
-            cbProfessor.TabIndex = 23;
+            cbProfessor.TabIndex = 15;
             // 
             // cbDisciplina
             // 
@@ -137,7 +137,7 @@
             cbDisciplina.Location = new Point(164, 64);
             cbDisciplina.Name = "cbDisciplina";
             cbDisciplina.Size = new Size(192, 29);
-            cbDisciplina.TabIndex = 22;
+            cbDisciplina.TabIndex = 10;
             // 
             // cbAluno
             // 
@@ -146,7 +146,7 @@
             cbAluno.Location = new Point(164, 29);
             cbAluno.Name = "cbAluno";
             cbAluno.Size = new Size(192, 29);
-            cbAluno.TabIndex = 21;
+            cbAluno.TabIndex = 5;
             // 
             // lblSemestre
             // 
@@ -155,7 +155,7 @@
             lblSemestre.Location = new Point(6, 136);
             lblSemestre.Name = "lblSemestre";
             lblSemestre.Size = new Size(78, 21);
-            lblSemestre.TabIndex = 20;
+            lblSemestre.TabIndex = 16;
             lblSemestre.Text = "Semestre:";
             // 
             // btnExcluir
@@ -167,7 +167,7 @@
             btnExcluir.Location = new Point(242, 227);
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(110, 35);
-            btnExcluir.TabIndex = 18;
+            btnExcluir.TabIndex = 27;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = false;
             btnExcluir.Click += btnExcluir_Click;
@@ -181,7 +181,7 @@
             btnSalvar.Location = new Point(126, 227);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(110, 35);
-            btnSalvar.TabIndex = 17;
+            btnSalvar.TabIndex = 26;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = false;
             btnSalvar.Click += btnSalvar_Click;
@@ -195,7 +195,7 @@
             btnNovo.Location = new Point(10, 227);
             btnNovo.Name = "btnNovo";
             btnNovo.Size = new Size(110, 35);
-            btnNovo.TabIndex = 16;
+            btnNovo.TabIndex = 25;
             btnNovo.Text = "Novo";
             btnNovo.UseVisualStyleBackColor = false;
             btnNovo.Click += btnNovo_Click;
@@ -238,7 +238,7 @@
             btnAtualizar.Location = new Point(973, 180);
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.Size = new Size(23, 23);
-            btnAtualizar.TabIndex = 29;
+            btnAtualizar.TabIndex = 31;
             btnAtualizar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnAtualizar.UseVisualStyleBackColor = false;
             btnAtualizar.Click += btnAtualizar_Click;
@@ -250,7 +250,7 @@
             txtPesquisar.Name = "txtPesquisar";
             txtPesquisar.PlaceholderText = "Pesquisar aluno...";
             txtPesquisar.Size = new Size(150, 23);
-            txtPesquisar.TabIndex = 28;
+            txtPesquisar.TabIndex = 30;
             txtPesquisar.TextChanged += txtPesquisar_TextChanged;
             // 
             // dgvMatriculas
@@ -275,7 +275,7 @@
             dgvMatriculas.Name = "dgvMatriculas";
             dgvMatriculas.ReadOnly = true;
             dgvMatriculas.Size = new Size(618, 296);
-            dgvMatriculas.TabIndex = 30;
+            dgvMatriculas.TabIndex = 35;
             dgvMatriculas.CellClick += dgvMatriculas_CellClick;
             // 
             // id
@@ -330,9 +330,9 @@
             Name = "FormMatricula";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Matrícula - EduSmart";
-            FormClosing += FormMatriculas_FormClosing;
-            Load += FormMatriculas_Load;
-            KeyDown += FormMatriculas_KeyDown;
+            FormClosing += FormMatricula_FormClosing;
+            Load += FormMatricula_Load;
+            KeyDown += FormMatricula_KeyDown;
             pnMatricula.ResumeLayout(false);
             pnMatricula.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbMatricula).EndInit();

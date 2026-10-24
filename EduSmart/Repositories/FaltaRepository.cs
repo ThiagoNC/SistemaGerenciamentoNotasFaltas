@@ -109,12 +109,15 @@ namespace EduSmart.Repositories
                     f.idMatricula, 
                     f.dataFalta, 
                     f.quantidade,
-                    a.Nome AS NomeAluno, 
-                    d.Nome AS NomeDisciplina
+                    m.idAluno,
+                    a.nome AS NomeAluno, 
+                    d.nome AS NomeDisciplina,
+                    p.nome AS NomeProfessor
                 FROM Falta f
-                INNER JOIN Matricula m ON f.idMatricula = m.Id
-                INNER JOIN Aluno a ON m.idAluno = a.Id
-                INNER JOIN Disciplina d ON m.idDisciplina = d.Id
+                INNER JOIN Matricula m ON f.idMatricula = m.id
+                INNER JOIN Aluno a ON m.idAluno = a.id
+                INNER JOIN Disciplina d ON m.idDisciplina = d.id
+                INNER JOIN Professor p ON m.idProfessor = p.id
                 WHERE a.nome LIKE @nome";
 
                 using (var comando = new MySqlCommand(query, conexao))
@@ -132,8 +135,10 @@ namespace EduSmart.Repositories
                                 IdMatricula = Convert.ToInt32(reader["idMatricula"]),
                                 DataFalta = Convert.ToDateTime(reader["dataFalta"]),
                                 Quantidade = Convert.ToInt32(reader["quantidade"]),
+                                IdAluno = Convert.ToInt32(reader["idAluno"]),
                                 NomeAluno = reader["NomeAluno"].ToString(),
-                                NomeDisciplina = reader["NomeDisciplina"].ToString()
+                                NomeDisciplina = reader["NomeDisciplina"].ToString(),
+                                NomeProfessor = reader["NomeProfessor"].ToString()
                             });
                         }
                     }
