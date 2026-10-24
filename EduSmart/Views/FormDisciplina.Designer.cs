@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDisciplina));
-            pnDisciplinas = new Panel();
-            pbDisciplinas = new PictureBox();
-            lblGestaoDisciplinas = new Label();
+            pnDisciplina = new Panel();
+            pbDisciplina = new PictureBox();
+            lblGestaoDisciplina = new Label();
             btnAtualizar = new Button();
             txtPesquisar = new TextBox();
             dgvDisciplinas = new DataGridView();
@@ -48,44 +48,44 @@
             txtNome = new TextBox();
             lblNome = new Label();
             lblCargaHoraria = new Label();
-            pnDisciplinas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbDisciplinas).BeginInit();
+            pnDisciplina.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbDisciplina).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvDisciplinas).BeginInit();
             gbDisciplina.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudCargaHoraria).BeginInit();
             SuspendLayout();
             // 
-            // pnDisciplinas
+            // pnDisciplina
             // 
-            pnDisciplinas.BackColor = Color.LightSeaGreen;
-            pnDisciplinas.Controls.Add(pbDisciplinas);
-            pnDisciplinas.Controls.Add(lblGestaoDisciplinas);
-            pnDisciplinas.Dock = DockStyle.Top;
-            pnDisciplinas.Location = new Point(0, 0);
-            pnDisciplinas.Name = "pnDisciplinas";
-            pnDisciplinas.Size = new Size(1008, 150);
-            pnDisciplinas.TabIndex = 0;
+            pnDisciplina.BackColor = Color.LightSeaGreen;
+            pnDisciplina.Controls.Add(pbDisciplina);
+            pnDisciplina.Controls.Add(lblGestaoDisciplina);
+            pnDisciplina.Dock = DockStyle.Top;
+            pnDisciplina.Location = new Point(0, 0);
+            pnDisciplina.Name = "pnDisciplina";
+            pnDisciplina.Size = new Size(1008, 150);
+            pnDisciplina.TabIndex = 0;
             // 
-            // pbDisciplinas
+            // pbDisciplina
             // 
-            pbDisciplinas.Image = Properties.Resources.Icon1;
-            pbDisciplinas.Location = new Point(170, 27);
-            pbDisciplinas.Name = "pbDisciplinas";
-            pbDisciplinas.Size = new Size(100, 100);
-            pbDisciplinas.SizeMode = PictureBoxSizeMode.Zoom;
-            pbDisciplinas.TabIndex = 1;
-            pbDisciplinas.TabStop = false;
+            pbDisciplina.Image = Properties.Resources.Icon1;
+            pbDisciplina.Location = new Point(170, 27);
+            pbDisciplina.Name = "pbDisciplina";
+            pbDisciplina.Size = new Size(100, 100);
+            pbDisciplina.SizeMode = PictureBoxSizeMode.Zoom;
+            pbDisciplina.TabIndex = 1;
+            pbDisciplina.TabStop = false;
             // 
-            // lblGestaoDisciplinas
+            // lblGestaoDisciplina
             // 
-            lblGestaoDisciplinas.AutoSize = true;
-            lblGestaoDisciplinas.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblGestaoDisciplinas.ForeColor = Color.White;
-            lblGestaoDisciplinas.Location = new Point(276, 45);
-            lblGestaoDisciplinas.Name = "lblGestaoDisciplinas";
-            lblGestaoDisciplinas.Size = new Size(587, 65);
-            lblGestaoDisciplinas.TabIndex = 1;
-            lblGestaoDisciplinas.Text = "GESTÃO DE DISCIPLINAS";
+            lblGestaoDisciplina.AutoSize = true;
+            lblGestaoDisciplina.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGestaoDisciplina.ForeColor = Color.White;
+            lblGestaoDisciplina.Location = new Point(276, 45);
+            lblGestaoDisciplina.Name = "lblGestaoDisciplina";
+            lblGestaoDisciplina.Size = new Size(587, 65);
+            lblGestaoDisciplina.TabIndex = 1;
+            lblGestaoDisciplina.Text = "GESTÃO DE DISCIPLINAS";
             // 
             // btnAtualizar
             // 
@@ -112,19 +112,19 @@
             // 
             // dgvDisciplinas
             // 
-            dataGridViewCellStyle1.BackColor = Color.Gainsboro;
-            dgvDisciplinas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = Color.Gainsboro;
+            dgvDisciplinas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             dgvDisciplinas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvDisciplinas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvDisciplinas.BackgroundColor = Color.White;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvDisciplinas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvDisciplinas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgvDisciplinas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDisciplinas.Columns.AddRange(new DataGridViewColumn[] { id, nome, cargaHoraria });
             dgvDisciplinas.Location = new Point(378, 209);
@@ -259,7 +259,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 511);
-            Controls.Add(pnDisciplinas);
+            Controls.Add(pnDisciplina);
             Controls.Add(btnAtualizar);
             Controls.Add(txtPesquisar);
             Controls.Add(dgvDisciplinas);
@@ -273,9 +273,9 @@
             FormClosing += FormDisciplina_FormClosing;
             Load += FormDisciplina_Load;
             KeyDown += FormDisciplina_KeyDown;
-            pnDisciplinas.ResumeLayout(false);
-            pnDisciplinas.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbDisciplinas).EndInit();
+            pnDisciplina.ResumeLayout(false);
+            pnDisciplina.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbDisciplina).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvDisciplinas).EndInit();
             gbDisciplina.ResumeLayout(false);
             gbDisciplina.PerformLayout();
@@ -286,9 +286,9 @@
 
         #endregion
 
-        private Panel pnDisciplinas;
-        private PictureBox pbDisciplinas;
-        private Label lblGestaoDisciplinas;
+        private Panel pnDisciplina;
+        private PictureBox pbDisciplina;
+        private Label lblGestaoDisciplina;
         private Button btnAtualizar;
         private TextBox txtPesquisar;
         private DataGridView dgvDisciplinas;

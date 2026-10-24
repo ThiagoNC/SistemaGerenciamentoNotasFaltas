@@ -60,6 +60,8 @@ namespace EduSmart.Services
 
         public List<Matricula> ListarPorProfessor(int idProfessor) => _matriculaRepository.ListarPorProfessor(idProfessor);
 
+        public List<Matricula> ListarTodos() => _matriculaRepository.ListarTodos();
+
         public decimal CalcularMedia(int idMatricula)
         {
             var notas = _notaRepository.ListarPorMatricula(idMatricula);

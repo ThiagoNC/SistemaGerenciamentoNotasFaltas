@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProfessor));
-            pnProfessores = new Panel();
-            pbProfessores = new PictureBox();
-            lblGestaoProfessores = new Label();
+            pnProfessor = new Panel();
+            pbProfessor = new PictureBox();
+            lblGestaoProfessor = new Label();
             btnAtualizar = new Button();
             txtPesquisar = new TextBox();
             dgvProfessores = new DataGridView();
@@ -52,44 +52,44 @@
             lblNome = new Label();
             txtSenha = new TextBox();
             lblSenhaHash = new Label();
-            pnProfessores.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbProfessores).BeginInit();
+            pnProfessor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbProfessor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvProfessores).BeginInit();
             gbProfessor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbOlho).BeginInit();
             SuspendLayout();
             // 
-            // pnProfessores
+            // pnProfessor
             // 
-            pnProfessores.BackColor = Color.LightSeaGreen;
-            pnProfessores.Controls.Add(pbProfessores);
-            pnProfessores.Controls.Add(lblGestaoProfessores);
-            pnProfessores.Dock = DockStyle.Top;
-            pnProfessores.Location = new Point(0, 0);
-            pnProfessores.Name = "pnProfessores";
-            pnProfessores.Size = new Size(1008, 150);
-            pnProfessores.TabIndex = 0;
+            pnProfessor.BackColor = Color.LightSeaGreen;
+            pnProfessor.Controls.Add(pbProfessor);
+            pnProfessor.Controls.Add(lblGestaoProfessor);
+            pnProfessor.Dock = DockStyle.Top;
+            pnProfessor.Location = new Point(0, 0);
+            pnProfessor.Name = "pnProfessor";
+            pnProfessor.Size = new Size(1008, 150);
+            pnProfessor.TabIndex = 0;
             // 
-            // pbProfessores
+            // pbProfessor
             // 
-            pbProfessores.Image = Properties.Resources.Icon1;
-            pbProfessores.Location = new Point(170, 27);
-            pbProfessores.Name = "pbProfessores";
-            pbProfessores.Size = new Size(100, 100);
-            pbProfessores.SizeMode = PictureBoxSizeMode.Zoom;
-            pbProfessores.TabIndex = 1;
-            pbProfessores.TabStop = false;
+            pbProfessor.Image = Properties.Resources.Icon1;
+            pbProfessor.Location = new Point(170, 27);
+            pbProfessor.Name = "pbProfessor";
+            pbProfessor.Size = new Size(100, 100);
+            pbProfessor.SizeMode = PictureBoxSizeMode.Zoom;
+            pbProfessor.TabIndex = 1;
+            pbProfessor.TabStop = false;
             // 
-            // lblGestaoProfessores
+            // lblGestaoProfessor
             // 
-            lblGestaoProfessores.AutoSize = true;
-            lblGestaoProfessores.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblGestaoProfessores.ForeColor = Color.White;
-            lblGestaoProfessores.Location = new Point(276, 45);
-            lblGestaoProfessores.Name = "lblGestaoProfessores";
-            lblGestaoProfessores.Size = new Size(618, 65);
-            lblGestaoProfessores.TabIndex = 1;
-            lblGestaoProfessores.Text = "GESTÃO DE PROFESSORES";
+            lblGestaoProfessor.AutoSize = true;
+            lblGestaoProfessor.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGestaoProfessor.ForeColor = Color.White;
+            lblGestaoProfessor.Location = new Point(276, 45);
+            lblGestaoProfessor.Name = "lblGestaoProfessor";
+            lblGestaoProfessor.Size = new Size(618, 65);
+            lblGestaoProfessor.TabIndex = 1;
+            lblGestaoProfessor.Text = "GESTÃO DE PROFESSORES";
             // 
             // btnAtualizar
             // 
@@ -116,19 +116,19 @@
             // 
             // dgvProfessores
             // 
-            dataGridViewCellStyle1.BackColor = Color.Gainsboro;
-            dgvProfessores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = Color.Gainsboro;
+            dgvProfessores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             dgvProfessores.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvProfessores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProfessores.BackgroundColor = Color.White;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvProfessores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvProfessores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgvProfessores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProfessores.Columns.AddRange(new DataGridViewColumn[] { id, nome, email, senhaHash });
             dgvProfessores.Location = new Point(378, 209);
@@ -303,7 +303,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 511);
-            Controls.Add(pnProfessores);
+            Controls.Add(pnProfessor);
             Controls.Add(btnAtualizar);
             Controls.Add(txtPesquisar);
             Controls.Add(dgvProfessores);
@@ -317,9 +317,9 @@
             FormClosing += FormProfessor_FormClosing;
             Load += FormProfessor_Load;
             KeyDown += FormProfessor_KeyDown;
-            pnProfessores.ResumeLayout(false);
-            pnProfessores.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbProfessores).EndInit();
+            pnProfessor.ResumeLayout(false);
+            pnProfessor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbProfessor).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvProfessores).EndInit();
             gbProfessor.ResumeLayout(false);
             gbProfessor.PerformLayout();
@@ -330,9 +330,9 @@
 
         #endregion
 
-        private Panel pnProfessores;
-        private PictureBox pbProfessores;
-        private Label lblGestaoProfessores;
+        private Panel pnProfessor;
+        private PictureBox pbProfessor;
+        private Label lblGestaoProfessor;
         private Button btnAtualizar;
         private TextBox txtPesquisar;
         private DataGridView dgvProfessores;
