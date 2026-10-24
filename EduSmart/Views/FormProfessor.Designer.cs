@@ -37,6 +37,10 @@
             btnAtualizar = new Button();
             txtPesquisar = new TextBox();
             dgvProfessores = new DataGridView();
+            id = new DataGridViewTextBoxColumn();
+            nome = new DataGridViewTextBoxColumn();
+            email = new DataGridViewTextBoxColumn();
+            senhaHash = new DataGridViewTextBoxColumn();
             gbProfessor = new GroupBox();
             pbOlho = new PictureBox();
             btnExcluir = new Button();
@@ -48,10 +52,6 @@
             lblNome = new Label();
             txtSenha = new TextBox();
             lblSenhaHash = new Label();
-            id = new DataGridViewTextBoxColumn();
-            nome = new DataGridViewTextBoxColumn();
-            email = new DataGridViewTextBoxColumn();
-            senhaHash = new DataGridViewTextBoxColumn();
             pnProfessores.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbProfessores).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvProfessores).BeginInit();
@@ -68,7 +68,7 @@
             pnProfessores.Location = new Point(0, 0);
             pnProfessores.Name = "pnProfessores";
             pnProfessores.Size = new Size(1008, 150);
-            pnProfessores.TabIndex = 71;
+            pnProfessores.TabIndex = 0;
             // 
             // pbProfessores
             // 
@@ -88,7 +88,7 @@
             lblGestaoProfessores.Location = new Point(276, 45);
             lblGestaoProfessores.Name = "lblGestaoProfessores";
             lblGestaoProfessores.Size = new Size(618, 65);
-            lblGestaoProfessores.TabIndex = 0;
+            lblGestaoProfessores.TabIndex = 1;
             lblGestaoProfessores.Text = "GESTÃO DE PROFESSORES";
             // 
             // btnAtualizar
@@ -99,7 +99,7 @@
             btnAtualizar.Location = new Point(973, 180);
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.Size = new Size(23, 23);
-            btnAtualizar.TabIndex = 75;
+            btnAtualizar.TabIndex = 21;
             btnAtualizar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnAtualizar.UseVisualStyleBackColor = false;
             btnAtualizar.Click += btnAtualizar_Click;
@@ -111,7 +111,7 @@
             txtPesquisar.Name = "txtPesquisar";
             txtPesquisar.PlaceholderText = "Pesquisar professores...";
             txtPesquisar.Size = new Size(150, 23);
-            txtPesquisar.TabIndex = 74;
+            txtPesquisar.TabIndex = 20;
             txtPesquisar.TextChanged += txtPesquisar_TextChanged;
             // 
             // dgvProfessores
@@ -136,137 +136,8 @@
             dgvProfessores.Name = "dgvProfessores";
             dgvProfessores.ReadOnly = true;
             dgvProfessores.Size = new Size(618, 296);
-            dgvProfessores.TabIndex = 73;
+            dgvProfessores.TabIndex = 25;
             dgvProfessores.CellClick += dgvProfessors_CellClick;
-            // 
-            // gbProfessor
-            // 
-            gbProfessor.Controls.Add(pbOlho);
-            gbProfessor.Controls.Add(btnExcluir);
-            gbProfessor.Controls.Add(btnSalvar);
-            gbProfessor.Controls.Add(btnNovo);
-            gbProfessor.Controls.Add(lblEmail);
-            gbProfessor.Controls.Add(txtEmail);
-            gbProfessor.Controls.Add(txtNome);
-            gbProfessor.Controls.Add(lblNome);
-            gbProfessor.Controls.Add(txtSenha);
-            gbProfessor.Controls.Add(lblSenhaHash);
-            gbProfessor.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            gbProfessor.Location = new Point(10, 180);
-            gbProfessor.Name = "gbProfessor";
-            gbProfessor.Size = new Size(362, 325);
-            gbProfessor.TabIndex = 72;
-            gbProfessor.TabStop = false;
-            gbProfessor.Text = "Informações do Professor";
-            // 
-            // pbOlho
-            // 
-            pbOlho.BorderStyle = BorderStyle.FixedSingle;
-            pbOlho.Image = Properties.Resources.olho;
-            pbOlho.Location = new Point(328, 99);
-            pbOlho.Name = "pbOlho";
-            pbOlho.Size = new Size(28, 29);
-            pbOlho.SizeMode = PictureBoxSizeMode.Zoom;
-            pbOlho.TabIndex = 11;
-            pbOlho.TabStop = false;
-            pbOlho.Click += pcOlho_Click;
-            // 
-            // btnExcluir
-            // 
-            btnExcluir.BackColor = Color.Red;
-            btnExcluir.FlatStyle = FlatStyle.Flat;
-            btnExcluir.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnExcluir.ForeColor = Color.White;
-            btnExcluir.Location = new Point(242, 227);
-            btnExcluir.Name = "btnExcluir";
-            btnExcluir.Size = new Size(110, 35);
-            btnExcluir.TabIndex = 8;
-            btnExcluir.Text = "Excluir";
-            btnExcluir.UseVisualStyleBackColor = false;
-            btnExcluir.Click += btnExcluir_Click;
-            // 
-            // btnSalvar
-            // 
-            btnSalvar.BackColor = Color.LightSeaGreen;
-            btnSalvar.FlatStyle = FlatStyle.Flat;
-            btnSalvar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnSalvar.ForeColor = Color.White;
-            btnSalvar.Location = new Point(126, 227);
-            btnSalvar.Name = "btnSalvar";
-            btnSalvar.Size = new Size(110, 35);
-            btnSalvar.TabIndex = 7;
-            btnSalvar.Text = "Salvar";
-            btnSalvar.UseVisualStyleBackColor = false;
-            btnSalvar.Click += btnSalvar_Click;
-            // 
-            // btnNovo
-            // 
-            btnNovo.BackColor = Color.Green;
-            btnNovo.FlatStyle = FlatStyle.Flat;
-            btnNovo.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnNovo.ForeColor = Color.White;
-            btnNovo.Location = new Point(10, 227);
-            btnNovo.Name = "btnNovo";
-            btnNovo.Size = new Size(110, 35);
-            btnNovo.TabIndex = 6;
-            btnNovo.Text = "Novo";
-            btnNovo.UseVisualStyleBackColor = false;
-            btnNovo.Click += btnNovo_Click;
-            // 
-            // lblEmail
-            // 
-            lblEmail.AutoSize = true;
-            lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblEmail.Location = new Point(6, 67);
-            lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(57, 21);
-            lblEmail.TabIndex = 5;
-            lblEmail.Text = "E-mail:";
-            // 
-            // txtEmail
-            // 
-            txtEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtEmail.Location = new Point(164, 64);
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(192, 29);
-            txtEmail.TabIndex = 4;
-            // 
-            // txtNome
-            // 
-            txtNome.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtNome.Location = new Point(164, 29);
-            txtNome.Name = "txtNome";
-            txtNome.Size = new Size(192, 29);
-            txtNome.TabIndex = 3;
-            // 
-            // lblNome
-            // 
-            lblNome.AutoSize = true;
-            lblNome.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblNome.Location = new Point(6, 32);
-            lblNome.Name = "lblNome";
-            lblNome.Size = new Size(56, 21);
-            lblNome.TabIndex = 2;
-            lblNome.Text = "Nome:";
-            // 
-            // txtSenha
-            // 
-            txtSenha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSenha.Location = new Point(164, 99);
-            txtSenha.Name = "txtSenha";
-            txtSenha.PasswordChar = '*';
-            txtSenha.Size = new Size(192, 29);
-            txtSenha.TabIndex = 1;
-            // 
-            // lblSenhaHash
-            // 
-            lblSenhaHash.AutoSize = true;
-            lblSenhaHash.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblSenhaHash.Location = new Point(6, 102);
-            lblSenhaHash.Name = "lblSenhaHash";
-            lblSenhaHash.Size = new Size(56, 21);
-            lblSenhaHash.TabIndex = 0;
-            lblSenhaHash.Text = "Senha:";
             // 
             // id
             // 
@@ -298,6 +169,135 @@
             senhaHash.ReadOnly = true;
             senhaHash.Visible = false;
             // 
+            // gbProfessor
+            // 
+            gbProfessor.Controls.Add(pbOlho);
+            gbProfessor.Controls.Add(btnExcluir);
+            gbProfessor.Controls.Add(btnSalvar);
+            gbProfessor.Controls.Add(btnNovo);
+            gbProfessor.Controls.Add(lblEmail);
+            gbProfessor.Controls.Add(txtEmail);
+            gbProfessor.Controls.Add(txtNome);
+            gbProfessor.Controls.Add(lblNome);
+            gbProfessor.Controls.Add(txtSenha);
+            gbProfessor.Controls.Add(lblSenhaHash);
+            gbProfessor.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            gbProfessor.Location = new Point(10, 180);
+            gbProfessor.Name = "gbProfessor";
+            gbProfessor.Size = new Size(362, 325);
+            gbProfessor.TabIndex = 2;
+            gbProfessor.TabStop = false;
+            gbProfessor.Text = "Informações do Professor";
+            // 
+            // pbOlho
+            // 
+            pbOlho.BorderStyle = BorderStyle.FixedSingle;
+            pbOlho.Image = Properties.Resources.olho;
+            pbOlho.Location = new Point(328, 99);
+            pbOlho.Name = "pbOlho";
+            pbOlho.Size = new Size(28, 29);
+            pbOlho.SizeMode = PictureBoxSizeMode.Zoom;
+            pbOlho.TabIndex = 11;
+            pbOlho.TabStop = false;
+            pbOlho.Click += pcOlho_Click;
+            // 
+            // btnExcluir
+            // 
+            btnExcluir.BackColor = Color.Red;
+            btnExcluir.FlatStyle = FlatStyle.Flat;
+            btnExcluir.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnExcluir.ForeColor = Color.White;
+            btnExcluir.Location = new Point(242, 227);
+            btnExcluir.Name = "btnExcluir";
+            btnExcluir.Size = new Size(110, 35);
+            btnExcluir.TabIndex = 18;
+            btnExcluir.Text = "Excluir";
+            btnExcluir.UseVisualStyleBackColor = false;
+            btnExcluir.Click += btnExcluir_Click;
+            // 
+            // btnSalvar
+            // 
+            btnSalvar.BackColor = Color.LightSeaGreen;
+            btnSalvar.FlatStyle = FlatStyle.Flat;
+            btnSalvar.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnSalvar.ForeColor = Color.White;
+            btnSalvar.Location = new Point(126, 227);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Size = new Size(110, 35);
+            btnSalvar.TabIndex = 17;
+            btnSalvar.Text = "Salvar";
+            btnSalvar.UseVisualStyleBackColor = false;
+            btnSalvar.Click += btnSalvar_Click;
+            // 
+            // btnNovo
+            // 
+            btnNovo.BackColor = Color.Green;
+            btnNovo.FlatStyle = FlatStyle.Flat;
+            btnNovo.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnNovo.ForeColor = Color.White;
+            btnNovo.Location = new Point(10, 227);
+            btnNovo.Name = "btnNovo";
+            btnNovo.Size = new Size(110, 35);
+            btnNovo.TabIndex = 16;
+            btnNovo.Text = "Novo";
+            btnNovo.UseVisualStyleBackColor = false;
+            btnNovo.Click += btnNovo_Click;
+            // 
+            // lblEmail
+            // 
+            lblEmail.AutoSize = true;
+            lblEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblEmail.Location = new Point(6, 67);
+            lblEmail.Name = "lblEmail";
+            lblEmail.Size = new Size(57, 21);
+            lblEmail.TabIndex = 6;
+            lblEmail.Text = "E-mail:";
+            // 
+            // txtEmail
+            // 
+            txtEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtEmail.Location = new Point(164, 64);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(192, 29);
+            txtEmail.TabIndex = 10;
+            // 
+            // txtNome
+            // 
+            txtNome.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNome.Location = new Point(164, 29);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new Size(192, 29);
+            txtNome.TabIndex = 5;
+            // 
+            // lblNome
+            // 
+            lblNome.AutoSize = true;
+            lblNome.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNome.Location = new Point(6, 32);
+            lblNome.Name = "lblNome";
+            lblNome.Size = new Size(56, 21);
+            lblNome.TabIndex = 3;
+            lblNome.Text = "Nome:";
+            // 
+            // txtSenha
+            // 
+            txtSenha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSenha.Location = new Point(164, 99);
+            txtSenha.Name = "txtSenha";
+            txtSenha.PasswordChar = '*';
+            txtSenha.Size = new Size(192, 29);
+            txtSenha.TabIndex = 15;
+            // 
+            // lblSenhaHash
+            // 
+            lblSenhaHash.AutoSize = true;
+            lblSenhaHash.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSenhaHash.Location = new Point(6, 102);
+            lblSenhaHash.Name = "lblSenhaHash";
+            lblSenhaHash.Size = new Size(56, 21);
+            lblSenhaHash.TabIndex = 11;
+            lblSenhaHash.Text = "Senha:";
+            // 
             // FormProfessor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -309,6 +309,8 @@
             Controls.Add(dgvProfessores);
             Controls.Add(gbProfessor);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FormProfessor";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Professores - EduSmart";

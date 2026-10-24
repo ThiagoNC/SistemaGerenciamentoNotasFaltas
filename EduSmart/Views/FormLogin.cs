@@ -23,7 +23,7 @@ namespace EduSmart
                 //var formPrincipal = new FormPrincipal(professorLogado);
                 //formPrincipal.Show();
 
-                var formPrincipal = new FormProfessor();
+                var formPrincipal = new FormDisciplina();
                 formPrincipal.Show();
 
                 this.Hide();

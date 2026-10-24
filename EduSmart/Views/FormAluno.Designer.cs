@@ -86,7 +86,7 @@
             lblGestaoAluno.Location = new Point(276, 45);
             lblGestaoAluno.Name = "lblGestaoAluno";
             lblGestaoAluno.Size = new Size(491, 65);
-            lblGestaoAluno.TabIndex = 0;
+            lblGestaoAluno.TabIndex = 1;
             lblGestaoAluno.Text = "GESTÃO DE ALUNOS";
             // 
             // gbAluno
@@ -104,7 +104,7 @@
             gbAluno.Location = new Point(10, 180);
             gbAluno.Name = "gbAluno";
             gbAluno.Size = new Size(362, 325);
-            gbAluno.TabIndex = 5;
+            gbAluno.TabIndex = 2;
             gbAluno.TabStop = false;
             gbAluno.Text = "Informações do Aluno";
             // 
@@ -117,7 +117,7 @@
             btnExcluir.Location = new Point(242, 227);
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(110, 35);
-            btnExcluir.TabIndex = 8;
+            btnExcluir.TabIndex = 18;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = false;
             btnExcluir.Click += btnExcluir_Click;
@@ -131,7 +131,7 @@
             btnSalvar.Location = new Point(126, 227);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(110, 35);
-            btnSalvar.TabIndex = 7;
+            btnSalvar.TabIndex = 17;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = false;
             btnSalvar.Click += btnSalvar_Click;
@@ -145,7 +145,7 @@
             btnNovo.Location = new Point(10, 227);
             btnNovo.Name = "btnNovo";
             btnNovo.Size = new Size(110, 35);
-            btnNovo.TabIndex = 6;
+            btnNovo.TabIndex = 16;
             btnNovo.Text = "Novo";
             btnNovo.UseVisualStyleBackColor = false;
             btnNovo.Click += btnNovo_Click;
@@ -157,7 +157,7 @@
             lblEmail.Location = new Point(6, 102);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(57, 21);
-            lblEmail.TabIndex = 5;
+            lblEmail.TabIndex = 11;
             lblEmail.Text = "E-mail:";
             // 
             // txtEmail
@@ -166,7 +166,7 @@
             txtEmail.Location = new Point(164, 99);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(192, 29);
-            txtEmail.TabIndex = 4;
+            txtEmail.TabIndex = 15;
             // 
             // txtNome
             // 
@@ -174,7 +174,7 @@
             txtNome.Location = new Point(164, 64);
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(192, 29);
-            txtNome.TabIndex = 3;
+            txtNome.TabIndex = 10;
             // 
             // lblNome
             // 
@@ -183,7 +183,7 @@
             lblNome.Location = new Point(6, 67);
             lblNome.Name = "lblNome";
             lblNome.Size = new Size(56, 21);
-            lblNome.TabIndex = 2;
+            lblNome.TabIndex = 6;
             lblNome.Text = "Nome:";
             // 
             // txtRa
@@ -192,7 +192,7 @@
             txtRa.Location = new Point(164, 29);
             txtRa.Name = "txtRa";
             txtRa.Size = new Size(192, 29);
-            txtRa.TabIndex = 1;
+            txtRa.TabIndex = 5;
             // 
             // lblRA
             // 
@@ -201,7 +201,7 @@
             lblRA.Location = new Point(6, 32);
             lblRA.Name = "lblRA";
             lblRA.Size = new Size(33, 21);
-            lblRA.TabIndex = 0;
+            lblRA.TabIndex = 3;
             lblRA.Text = "RA:";
             // 
             // dgvAlunos
@@ -226,7 +226,7 @@
             dgvAlunos.Name = "dgvAlunos";
             dgvAlunos.ReadOnly = true;
             dgvAlunos.Size = new Size(618, 296);
-            dgvAlunos.TabIndex = 6;
+            dgvAlunos.TabIndex = 25;
             dgvAlunos.CellClick += dgvAlunos_CellClick;
             // 
             // id
@@ -265,7 +265,7 @@
             txtPesquisar.Name = "txtPesquisar";
             txtPesquisar.PlaceholderText = "Pesquisar aluno...";
             txtPesquisar.Size = new Size(150, 23);
-            txtPesquisar.TabIndex = 7;
+            txtPesquisar.TabIndex = 20;
             txtPesquisar.TextChanged += txtPesquisar_TextChanged;
             // 
             // btnAtualizar
@@ -276,7 +276,7 @@
             btnAtualizar.Location = new Point(973, 180);
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.Size = new Size(23, 23);
-            btnAtualizar.TabIndex = 70;
+            btnAtualizar.TabIndex = 21;
             btnAtualizar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnAtualizar.UseVisualStyleBackColor = false;
             btnAtualizar.Click += btnAtualizar_Click;
