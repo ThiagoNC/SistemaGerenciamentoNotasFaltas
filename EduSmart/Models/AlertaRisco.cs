@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EduSmart.Models
 {
-    internal class AlertaRisco
+    public class AlertaRisco
     {
         public int Id { get; set; }
         public int IdMatricula { get; set; }
@@ -16,7 +16,7 @@ namespace EduSmart.Models
         public string NomeDisciplina { get; set; }
     }
 
-    internal enum NivelRisco
+    public enum NivelRisco
     {
         Baixo,
         Medio,

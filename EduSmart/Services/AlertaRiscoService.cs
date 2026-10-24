@@ -1,81 +1,81 @@
-﻿using EduSmart.Models;
-using EduSmart.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
+using EduSmart.Models;
+using EduSmart.Repositories;
 
 namespace EduSmart.Services
 {
-    internal class AlertaRiscoService
+    public class AlertaRiscoService
     {
-        private readonly AlertaRiscoRepository _alertaRiscoRepository;
         private readonly MatriculaService _matriculaService;
+        private readonly NotaService _notaService;
+        private readonly FaltaService _faltaService;
+        private readonly AlertaRiscoRepository _alertaRepository;
 
         public AlertaRiscoService()
         {
-            _alertaRiscoRepository = new AlertaRiscoRepository();
-
             _matriculaService = new MatriculaService();
+            _notaService = new NotaService();
+            _faltaService = new FaltaService();
+            _alertaRepository = new AlertaRiscoRepository();
         }
 
-        public void Inserir(AlertaRisco alerta)
+        public async Task<List<AlertaRisco>> ExecutarAnaliseGeralAsync()
         {
-            if (alerta.IdMatricula <= 0) throw new Exception("Matrícula inválida.");
+            _alertaRepository.LimparAnalisesAntigas();
 
-            if (string.IsNullOrWhiteSpace(alerta.JustificativaIa)) throw new Exception("A justificativa da IA é obrigatória.");
+            var alertasGerados = new List<AlertaRisco>();
 
-            _alertaRiscoRepository.Inserir(alerta);
+            var matriculas = _matriculaService.ListarTodos();
+
+            foreach (var matricula in matriculas)
+            {
+                var notas = _notaService.ListarPorNomeAluno("").Where(n => n.IdMatricula == matricula.Id).ToList();
+                var faltas = _faltaService.ListarPorNomeAluno("").Where(f => f.IdMatricula == matricula.Id).ToList();
+
+                decimal media = notas.Any() ? notas.Average(n => n.Valor) : 0;
+                int totalFaltas = faltas.Sum(f => f.Quantidade);
+
+                var alerta = await AnalisarRiscoComIA(matricula.Id, media, totalFaltas);
+
+                if (alerta != null)
+                {
+                    alerta.NomeAluno = matricula.NomeAluno;
+                    alerta.NomeDisciplina = matricula.NomeDisciplina;
+                    alertasGerados.Add(alerta);
+
+                    _alertaRepository.Inserir(alerta);
+                }
+            }
+
+            return alertasGerados;
         }
 
-        public void Atualizar(AlertaRisco alerta)
+        private Task<AlertaRisco> AnalisarRiscoComIA(int idMatricula, decimal media, int faltas)
         {
-            if (alerta.Id <= 0) throw new Exception("Alerta inválido para atualização.");
+            NivelRisco risco = NivelRisco.Baixo;
+            string justificativa = "Desempenho satisfatório e frequência regular.";
 
-            if (alerta.IdMatricula <= 0) throw new Exception("Matrícula inválida.");
+            if (media < 5m || faltas >= 5)
+            {
+                risco = NivelRisco.Alto;
+                justificativa = "Alerta crítico: probabilidade alta de reprovação por " + (media < 5m ? "nota insuficiente." : "excesso de faltas.");
+            }
+            else if (media < 7m || faltas >= 3)
+            {
+                risco = NivelRisco.Medio;
+                justificativa = "Atenção: oscilação no rendimento ou faltas recentes requerem acompanhamento.";
+            }
 
-            if (string.IsNullOrWhiteSpace(alerta.JustificativaIa)) throw new Exception("A justificativa da IA não pode ficar em branco.");
-
-            _alertaRiscoRepository.Atualizar(alerta);
-        }
-
-        public void Excluir(int id)
-        {
-            if (id <= 0) throw new Exception("Selecione um alerta válido para excluir.");
-
-            _alertaRiscoRepository.Excluir(id);
-        }
-
-        public AlertaRisco ListarPorId(int id) => _alertaRiscoRepository.ListarPorId(id);
-
-        public List<AlertaRisco> ListarPorNomeAluno(string nomeAluno) => _alertaRiscoRepository.ListarPorNomeAluno(nomeAluno);
-
-        public List<AlertaRisco> ListarPorMatricula(int idMatricula) => _alertaRiscoRepository.ListarPorMatricula(idMatricula);
-
-        public void GerarAlertaComIA(int idMatricula)
-        {
-            decimal media = _matriculaService.CalcularMedia(idMatricula);
-            decimal frequencia = _matriculaService.CalcularFrequencia(idMatricula);
-
-            string prompt = $@"
-            Você é um assistente educacional de uma faculdade. Analise o seguinte aluno:
-            - Média atual: {media} (notas variam de 0 a 10)
-            - Frequência atual: {frequencia}%
-            
-            Retorne um nível de risco de reprovação (Baixo, Medio ou Alto) e uma justificativa curta (máximo de 3 linhas).";
-
-            /*
-            var novoAlerta = new AlertaRisco
+            return Task.FromResult(new AlertaRisco
             {
                 IdMatricula = idMatricula,
-                NivelRisco = NivelRisco.Alto, // Pegar da resposta da API
-                JustificativaIa = "Aluno com média e frequência muito baixas.", // Pegar da resposta da API
+                NivelRisco = risco,
+                JustificativaIa = justificativa,
                 DataAnalise = DateTime.Now
-            };
-
-            Inserir(novoAlerta);
-            */
-
-            throw new NotImplementedException("A integração direta com a API da IA será implementada na próxima fase do projeto EduSmart.");
+            });
         }
     }
 }
