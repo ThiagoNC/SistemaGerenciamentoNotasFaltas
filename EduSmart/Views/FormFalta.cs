@@ -139,8 +139,6 @@ namespace EduSmart.Views
 
             if (dgvFaltas.Columns["idAluno"] != null) dgvFaltas.Columns["idAluno"].Visible = false;
             if (dgvFaltas.Columns["idMatricula"] != null) dgvFaltas.Columns["idMatricula"].Visible = false;
-
-            //if (dgvFaltas.Columns["DataHora"] != null) dgvFaltas.Columns["DataHora"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
         }
 
         private void Novo()

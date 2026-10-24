@@ -108,17 +108,19 @@ namespace EduSmart.Repositories
             {
                 string query = @"
                 SELECT 
-                    n.Id, 
-                    n.IdMatricula, 
-                    n.Tipo,
-                    n.Valor,
-                    n.DataLancamento,
-                    a.Nome AS NomeAluno, 
-                    d.Nome AS NomeDisciplina
+                    n.id, 
+                    n.idMatricula, 
+                    n.tipo,
+                    n.valor,
+                    n.dataLancamento,
+                    a.nome AS NomeAluno, 
+                    d.nome AS NomeDisciplina,
+                    p.nome AS NomeProfessor
                 FROM Nota n
-                INNER JOIN Matricula m ON n.IdMatricula = m.Id
-                INNER JOIN Aluno a ON m.IdAluno = a.Id
-                INNER JOIN Disciplina d ON m.IdDisciplina = d.Id
+                INNER JOIN Matricula m ON n.idMatricula = m.id
+                INNER JOIN Aluno a ON m.idAluno = a.id
+                INNER JOIN Disciplina d ON m.idDisciplina = d.id
+                INNER JOIN Professor p ON m.idProfessor = p.id
                 WHERE a.Nome LIKE @nome";
 
                 using (var comando = new MySqlCommand(query, conexao))
@@ -138,7 +140,8 @@ namespace EduSmart.Repositories
                                 Valor = Convert.ToDecimal(reader["valor"]),
                                 DataLancamento = Convert.ToDateTime(reader["dataLancamento"]),
                                 NomeAluno = reader["NomeAluno"].ToString(),
-                                NomeDisciplina = reader["NomeDisciplina"].ToString()
+                                NomeDisciplina = reader["NomeDisciplina"].ToString(),
+                                NomeProfessor = reader["NomeProfessor"].ToString()
                             });
                         }
                     }

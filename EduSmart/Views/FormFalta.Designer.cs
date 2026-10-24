@@ -38,7 +38,7 @@
             lblQuantidade = new Label();
             nudQuantidade = new NumericUpDown();
             dtpDataFalta = new DateTimePicker();
-            label1 = new Label();
+            lblMatricula = new Label();
             cbMatricula = new ComboBox();
             cbAluno = new ComboBox();
             btnExcluir = new Button();
@@ -99,7 +99,7 @@
             gbFalta.Controls.Add(lblQuantidade);
             gbFalta.Controls.Add(nudQuantidade);
             gbFalta.Controls.Add(dtpDataFalta);
-            gbFalta.Controls.Add(label1);
+            gbFalta.Controls.Add(lblMatricula);
             gbFalta.Controls.Add(cbMatricula);
             gbFalta.Controls.Add(cbAluno);
             gbFalta.Controls.Add(btnExcluir);
@@ -144,15 +144,15 @@
             dtpDataFalta.Size = new Size(192, 29);
             dtpDataFalta.TabIndex = 15;
             // 
-            // label1
+            // lblMatricula
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(6, 67);
-            label1.Name = "label1";
-            label1.Size = new Size(78, 21);
-            label1.TabIndex = 6;
-            label1.Text = "Matrícula:";
+            lblMatricula.AutoSize = true;
+            lblMatricula.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblMatricula.Location = new Point(6, 67);
+            lblMatricula.Name = "lblMatricula";
+            lblMatricula.Size = new Size(78, 21);
+            lblMatricula.TabIndex = 6;
+            lblMatricula.Text = "Matrícula:";
             // 
             // cbMatricula
             // 
@@ -162,6 +162,7 @@
             cbMatricula.Name = "cbMatricula";
             cbMatricula.Size = new Size(192, 29);
             cbMatricula.TabIndex = 10;
+            cbMatricula.SelectedIndexChanged += cbMatricula_SelectedIndexChanged;
             // 
             // cbAluno
             // 
@@ -371,7 +372,7 @@
         private TextBox txtPesquisar;
         private DataGridView dgvFaltas;
         private ComboBox cbAluno;
-        private Label label1;
+        private Label lblMatricula;
         private ComboBox cbMatricula;
         private DateTimePicker dtpDataFalta;
         private Label lblQuantidade;

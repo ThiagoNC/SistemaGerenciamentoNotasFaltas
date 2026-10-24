@@ -12,7 +12,9 @@ namespace EduSmart.Models
         public decimal Valor { get; set; }
         public DateTime DataLancamento { get; set; }
 
+        public int IdAluno { get; set; }
         public string NomeAluno { get; set; }
         public string NomeDisciplina { get; set; }
+        public string NomeProfessor { get; set; }
     }
 }
