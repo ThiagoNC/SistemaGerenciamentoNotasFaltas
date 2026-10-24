@@ -12,6 +12,8 @@ namespace EduSmart.Views
 {
     public partial class FormFalta : Form
     {
+        private bool _selecionandoPeloGrid = false;
+
         public FormFalta()
         {
             InitializeComponent();
@@ -68,7 +70,10 @@ namespace EduSmart.Views
 
                     cbMatricula.SelectedIndexChanged += cbMatricula_SelectedIndexChanged;
 
-                    AtualizarGrid(idAluno: idAluno);
+                    if (!_selecionandoPeloGrid)
+                    {
+                        AtualizarGrid(idAluno: idAluno);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -84,7 +89,10 @@ namespace EduSmart.Views
 
         private void cbMatricula_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AtualizarGridSelecionado();
+            if (!_selecionandoPeloGrid)
+            {
+                AtualizarGridSelecionado();
+            }
         }
 
         private void AtualizarGridSelecionado()
@@ -155,18 +163,21 @@ namespace EduSmart.Views
         {
             if (e.RowIndex >= 0)
             {
+                _selecionandoPeloGrid = true;
+
                 DataGridViewRow row = dgvFaltas.Rows[e.RowIndex];
 
                 string idSelecionado = row.Cells["id"].Value.ToString();
 
                 cbAluno.SelectedValue = row.Cells["idAluno"].Value;
                 cbMatricula.SelectedValue = row.Cells["idMatricula"].Value;
-
                 DateTime dataFalta = Convert.ToDateTime(row.Cells["dataFalta"].Value);
                 dtpDataFalta.Value = dataFalta.Date;
                 nudQuantidade.Value = Convert.ToInt32(row.Cells["quantidade"].Value);
 
                 this.Tag = idSelecionado;
+
+                _selecionandoPeloGrid = false;
             }
         }
 
@@ -204,7 +215,7 @@ namespace EduSmart.Views
                     MessageBox.Show("Falta atualizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                this.Tag = null;
+                Novo();
                 AtualizarGridSelecionado();
             }
             catch (Exception ex)
@@ -234,7 +245,7 @@ namespace EduSmart.Views
 
                     MessageBox.Show("Falta excluída com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    this.Tag = null;
+                    Novo();
                     AtualizarGridSelecionado();
                 }
                 catch (Exception ex)

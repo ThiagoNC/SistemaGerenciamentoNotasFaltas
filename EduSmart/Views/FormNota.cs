@@ -15,6 +15,8 @@ namespace EduSmart.Views
 {
     public partial class FormNota : Form
     {
+        private bool _selecionandoPeloGrid = false;
+
         public FormNota()
         {
             InitializeComponent();
@@ -79,7 +81,10 @@ namespace EduSmart.Views
 
                     cbMatricula.SelectedIndexChanged += cbMatricula_SelectedIndexChanged;
 
-                    AtualizarGrid(idAluno: idAluno);
+                    if (!_selecionandoPeloGrid)
+                    {
+                        AtualizarGrid(idAluno: idAluno);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -95,7 +100,10 @@ namespace EduSmart.Views
 
         private void cbMatricula_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AtualizarGridSelecionado();
+            if (!_selecionandoPeloGrid)
+            {
+                AtualizarGridSelecionado();
+            }
         }
 
         private void AtualizarGridSelecionado()
@@ -148,8 +156,8 @@ namespace EduSmart.Views
             dgvNotas.Columns["dataLancamento"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
 
-            //if (dgvNotas.Columns["idAluno"] != null) dgvNotas.Columns["idAluno"].Visible = false;
-            //if (dgvNotas.Columns["idMatricula"] != null) dgvNotas.Columns["idMatricula"].Visible = false;
+            if (dgvNotas.Columns["idAluno"] != null) dgvNotas.Columns["idAluno"].Visible = false;
+            if (dgvNotas.Columns["idMatricula"] != null) dgvNotas.Columns["idMatricula"].Visible = false;
         }
 
         private void Novo()
@@ -166,6 +174,8 @@ namespace EduSmart.Views
         {
             if (e.RowIndex >= 0)
             {
+                _selecionandoPeloGrid = true;
+
                 DataGridViewRow row = dgvNotas.Rows[e.RowIndex];
 
                 string idSelecionado = row.Cells["id"].Value.ToString();
@@ -173,9 +183,11 @@ namespace EduSmart.Views
                 cbAluno.SelectedValue = row.Cells["idAluno"].Value;
                 cbMatricula.SelectedValue = row.Cells["idMatricula"].Value;
                 cbTipo.SelectedItem = row.Cells["tipo"].Value.ToString();
-                nudValor.Value = Convert.ToInt32(row.Cells["valor"].Value);
+                nudValor.Value = Convert.ToDecimal(row.Cells["valor"].Value);
 
                 this.Tag = idSelecionado;
+
+                _selecionandoPeloGrid = false;
             }
         }
 
@@ -190,7 +202,7 @@ namespace EduSmart.Views
             {
                 if (cbAluno.SelectedValue == null) { MessageBox.Show("Selecione um Aluno!"); return; }
                 if (cbMatricula.SelectedValue == null) { MessageBox.Show("Selecione uma Disciplina!"); return; }
-                if (Convert.ToInt32(nudValor.Value) == 0) { MessageBox.Show("Coloque um valor!"); return; }
+                if (Convert.ToDecimal(nudValor.Value) < 0) { MessageBox.Show("Coloque um valor!"); return; }
 
                 var service = new NotaService();
 
@@ -199,7 +211,7 @@ namespace EduSmart.Views
                     IdMatricula = Convert.ToInt32(cbMatricula.SelectedValue),
                     DataLancamento = DateTime.Now.Date,
                     Tipo = cbTipo.SelectedItem?.ToString() ?? "Prova",
-                    Valor = Convert.ToInt32(nudValor.Value)
+                    Valor = Convert.ToDecimal(nudValor.Value)
                 };
 
                 if (this.Tag == null || string.IsNullOrEmpty(this.Tag.ToString()))
@@ -214,7 +226,7 @@ namespace EduSmart.Views
                     MessageBox.Show("Nota atualizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                this.Tag = null;
+                Novo();
                 AtualizarGridSelecionado();
             }
             catch (Exception ex)
@@ -244,7 +256,7 @@ namespace EduSmart.Views
 
                     MessageBox.Show("Nota excluída com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    this.Tag = null;
+                    Novo();
                     AtualizarGridSelecionado();
                 }
                 catch (Exception ex)

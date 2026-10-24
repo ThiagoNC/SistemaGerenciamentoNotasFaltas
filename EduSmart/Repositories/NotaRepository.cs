@@ -113,6 +113,7 @@ namespace EduSmart.Repositories
                     n.tipo,
                     n.valor,
                     n.dataLancamento,
+                    m.idAluno,
                     a.nome AS NomeAluno, 
                     d.nome AS NomeDisciplina,
                     p.nome AS NomeProfessor
@@ -139,6 +140,7 @@ namespace EduSmart.Repositories
                                 Tipo = reader["tipo"].ToString(),
                                 Valor = Convert.ToDecimal(reader["valor"]),
                                 DataLancamento = Convert.ToDateTime(reader["dataLancamento"]),
+                                IdAluno = Convert.ToInt32(reader["idAluno"]),
                                 NomeAluno = reader["NomeAluno"].ToString(),
                                 NomeDisciplina = reader["NomeDisciplina"].ToString(),
                                 NomeProfessor = reader["NomeProfessor"].ToString()

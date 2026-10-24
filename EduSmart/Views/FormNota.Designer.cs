@@ -49,7 +49,6 @@
             btnAtualizar = new Button();
             txtPesquisar = new TextBox();
             dgvNotas = new DataGridView();
-            mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
             id = new DataGridViewTextBoxColumn();
             NomeAluno = new DataGridViewTextBoxColumn();
             NomeDisciplina = new DataGridViewTextBoxColumn();
@@ -57,6 +56,7 @@
             tipo = new DataGridViewTextBoxColumn();
             valor = new DataGridViewTextBoxColumn();
             dataLancamento = new DataGridViewTextBoxColumn();
+            mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
             pnNota.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbNota).BeginInit();
             gbNota.SuspendLayout();
@@ -138,7 +138,9 @@
             // 
             // nudValor
             // 
+            nudValor.DecimalPlaces = 2;
             nudValor.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            nudValor.Increment = new decimal(new int[] { 5, 0, 0, 65536 });
             nudValor.Location = new Point(164, 137);
             nudValor.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             nudValor.Name = "nudValor";
@@ -286,13 +288,6 @@
             dgvNotas.TabIndex = 35;
             dgvNotas.CellClick += dgvNotas_CellClick;
             // 
-            // mySqlCommand1
-            // 
-            mySqlCommand1.CacheAge = 0;
-            mySqlCommand1.Connection = null;
-            mySqlCommand1.EnableCaching = false;
-            mySqlCommand1.Transaction = null;
-            // 
             // id
             // 
             id.DataPropertyName = "id";
@@ -342,6 +337,13 @@
             dataLancamento.HeaderText = "Lançamento";
             dataLancamento.Name = "dataLancamento";
             dataLancamento.ReadOnly = true;
+            // 
+            // mySqlCommand1
+            // 
+            mySqlCommand1.CacheAge = 0;
+            mySqlCommand1.Connection = null;
+            mySqlCommand1.EnableCaching = false;
+            mySqlCommand1.Transaction = null;
             // 
             // FormNota
             // 
