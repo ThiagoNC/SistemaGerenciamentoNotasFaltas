@@ -41,7 +41,12 @@
             btnDisciplina = new Button();
             btnProfessor = new Button();
             btnAluno = new Button();
-            dgvAlertaRisco = new DataGridView();
+            dgvAlertas = new DataGridView();
+            NomeAluno = new DataGridViewTextBoxColumn();
+            NomeDisciplina = new DataGridViewTextBoxColumn();
+            NivelRisco = new DataGridViewTextBoxColumn();
+            JustificativaIa = new DataGridViewTextBoxColumn();
+            DataAnalise = new DataGridViewTextBoxColumn();
             pnTotalAlunos = new Panel();
             lblValorTotalAlunos = new Label();
             lblTotalAlunos = new Label();
@@ -51,12 +56,12 @@
             pnAlertasCriticos = new Panel();
             lblAlertasCriticos = new Label();
             lblValorAlertasCriticos = new Label();
-            btnExecutarAnaliseRisco = new Button();
-            button1 = new Button();
+            btnExecutarIA = new Button();
+            btnAtualizarAlertas = new Button();
             pnPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPrincipal).BeginInit();
             gbNavegacao.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvAlertaRisco).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAlertas).BeginInit();
             pnTotalAlunos.SuspendLayout();
             pnMatriculasAtivas.SuspendLayout();
             pnAlertasCriticos.SuspendLayout();
@@ -123,6 +128,7 @@
             btnSair.TabIndex = 6;
             btnSair.Text = "SAIR";
             btnSair.UseVisualStyleBackColor = true;
+            btnSair.Click += btnSair_Click;
             // 
             // btnNota
             // 
@@ -134,6 +140,7 @@
             btnNota.TabIndex = 5;
             btnNota.Text = "NOTAS";
             btnNota.UseVisualStyleBackColor = true;
+            btnNota.Click += btnNota_Click;
             // 
             // btnFalta
             // 
@@ -145,6 +152,7 @@
             btnFalta.TabIndex = 4;
             btnFalta.Text = "FALTAS";
             btnFalta.UseVisualStyleBackColor = true;
+            btnFalta.Click += btnFalta_Click;
             // 
             // btnMatricula
             // 
@@ -156,6 +164,7 @@
             btnMatricula.TabIndex = 3;
             btnMatricula.Text = "MATRÍCULAS";
             btnMatricula.UseVisualStyleBackColor = true;
+            btnMatricula.Click += btnMatricula_Click;
             // 
             // btnDisciplina
             // 
@@ -167,6 +176,7 @@
             btnDisciplina.TabIndex = 2;
             btnDisciplina.Text = "DISCIPLINAS";
             btnDisciplina.UseVisualStyleBackColor = true;
+            btnDisciplina.Click += btnDisciplina_Click;
             // 
             // btnProfessor
             // 
@@ -178,6 +188,7 @@
             btnProfessor.TabIndex = 1;
             btnProfessor.Text = "PROFESSORES";
             btnProfessor.UseVisualStyleBackColor = true;
+            btnProfessor.Click += btnProfessor_Click;
             // 
             // btnAluno
             // 
@@ -189,21 +200,59 @@
             btnAluno.TabIndex = 0;
             btnAluno.Text = "ALUNOS";
             btnAluno.UseVisualStyleBackColor = true;
+            btnAluno.Click += btnAluno_Click;
             // 
-            // dgvAlertaRisco
+            // dgvAlertas
             // 
             dataGridViewCellStyle1.BackColor = Color.Gainsboro;
-            dgvAlertaRisco.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dgvAlertaRisco.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvAlertaRisco.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvAlertaRisco.BackgroundColor = Color.White;
-            dgvAlertaRisco.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAlertaRisco.Location = new Point(185, 220);
-            dgvAlertaRisco.MultiSelect = false;
-            dgvAlertaRisco.Name = "dgvAlertaRisco";
-            dgvAlertaRisco.ReadOnly = true;
-            dgvAlertaRisco.Size = new Size(816, 283);
-            dgvAlertaRisco.TabIndex = 7;
+            dgvAlertas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgvAlertas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvAlertas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvAlertas.BackgroundColor = Color.White;
+            dgvAlertas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAlertas.Columns.AddRange(new DataGridViewColumn[] { NomeAluno, NomeDisciplina, NivelRisco, JustificativaIa, DataAnalise });
+            dgvAlertas.Location = new Point(185, 220);
+            dgvAlertas.MultiSelect = false;
+            dgvAlertas.Name = "dgvAlertas";
+            dgvAlertas.ReadOnly = true;
+            dgvAlertas.Size = new Size(816, 283);
+            dgvAlertas.TabIndex = 7;
+            dgvAlertas.CellFormatting += dgvAlertas_CellFormatting;
+            // 
+            // NomeAluno
+            // 
+            NomeAluno.DataPropertyName = "NomeAluno";
+            NomeAluno.HeaderText = "Aluno";
+            NomeAluno.Name = "NomeAluno";
+            NomeAluno.ReadOnly = true;
+            // 
+            // NomeDisciplina
+            // 
+            NomeDisciplina.DataPropertyName = "NomeDisciplina";
+            NomeDisciplina.HeaderText = "Disciplina";
+            NomeDisciplina.Name = "NomeDisciplina";
+            NomeDisciplina.ReadOnly = true;
+            // 
+            // NivelRisco
+            // 
+            NivelRisco.DataPropertyName = "NivelRisco";
+            NivelRisco.HeaderText = "Nível de Risco";
+            NivelRisco.Name = "NivelRisco";
+            NivelRisco.ReadOnly = true;
+            // 
+            // JustificativaIa
+            // 
+            JustificativaIa.DataPropertyName = "JustificativaIa";
+            JustificativaIa.HeaderText = "Justificativa da IA";
+            JustificativaIa.Name = "JustificativaIa";
+            JustificativaIa.ReadOnly = true;
+            // 
+            // DataAnalise
+            // 
+            DataAnalise.DataPropertyName = "DataAnalise";
+            DataAnalise.HeaderText = "Análise";
+            DataAnalise.Name = "DataAnalise";
+            DataAnalise.ReadOnly = true;
             // 
             // pnTotalAlunos
             // 
@@ -295,45 +344,47 @@
             lblValorAlertasCriticos.TabIndex = 1;
             lblValorAlertasCriticos.Text = "0";
             // 
-            // btnExecutarAnaliseRisco
+            // btnExecutarIA
             // 
-            btnExecutarAnaliseRisco.BackColor = Color.MediumSeaGreen;
-            btnExecutarAnaliseRisco.FlatStyle = FlatStyle.Flat;
-            btnExecutarAnaliseRisco.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnExecutarAnaliseRisco.ForeColor = Color.White;
-            btnExecutarAnaliseRisco.ImageAlign = ContentAlignment.MiddleLeft;
-            btnExecutarAnaliseRisco.Location = new Point(803, 156);
-            btnExecutarAnaliseRisco.Name = "btnExecutarAnaliseRisco";
-            btnExecutarAnaliseRisco.Size = new Size(198, 26);
-            btnExecutarAnaliseRisco.TabIndex = 7;
-            btnExecutarAnaliseRisco.Text = "Executar Análise de Risco (IA)";
-            btnExecutarAnaliseRisco.UseVisualStyleBackColor = false;
+            btnExecutarIA.BackColor = Color.MediumSeaGreen;
+            btnExecutarIA.FlatStyle = FlatStyle.Flat;
+            btnExecutarIA.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnExecutarIA.ForeColor = Color.White;
+            btnExecutarIA.ImageAlign = ContentAlignment.MiddleLeft;
+            btnExecutarIA.Location = new Point(803, 156);
+            btnExecutarIA.Name = "btnExecutarIA";
+            btnExecutarIA.Size = new Size(198, 26);
+            btnExecutarIA.TabIndex = 7;
+            btnExecutarIA.Text = "Executar Análise de Risco (IA)";
+            btnExecutarIA.UseVisualStyleBackColor = false;
+            btnExecutarIA.Click += btnExecutarIA_Click;
             // 
-            // button1
+            // btnAtualizarAlertas
             // 
-            button1.BackColor = SystemColors.Control;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = SystemColors.ControlText;
-            button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(803, 188);
-            button1.Name = "button1";
-            button1.Size = new Size(198, 26);
-            button1.TabIndex = 11;
-            button1.Text = "Grelha de Alertas de Risco (IA)";
-            button1.UseVisualStyleBackColor = false;
+            btnAtualizarAlertas.BackColor = SystemColors.Control;
+            btnAtualizarAlertas.FlatStyle = FlatStyle.Flat;
+            btnAtualizarAlertas.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAtualizarAlertas.ForeColor = SystemColors.ControlText;
+            btnAtualizarAlertas.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAtualizarAlertas.Location = new Point(803, 188);
+            btnAtualizarAlertas.Name = "btnAtualizarAlertas";
+            btnAtualizarAlertas.Size = new Size(198, 26);
+            btnAtualizarAlertas.TabIndex = 11;
+            btnAtualizarAlertas.Text = "Atualizar Alertas de Risco (IA)";
+            btnAtualizarAlertas.UseVisualStyleBackColor = false;
+            btnAtualizarAlertas.Click += btnAtualizarAlertas_Click;
             // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 511);
-            Controls.Add(button1);
-            Controls.Add(btnExecutarAnaliseRisco);
+            Controls.Add(btnAtualizarAlertas);
+            Controls.Add(btnExecutarIA);
             Controls.Add(pnAlertasCriticos);
             Controls.Add(pnMatriculasAtivas);
             Controls.Add(pnTotalAlunos);
-            Controls.Add(dgvAlertaRisco);
+            Controls.Add(dgvAlertas);
             Controls.Add(gbNavegacao);
             Controls.Add(pnPrincipal);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -342,11 +393,14 @@
             Name = "FormPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dashboard - EduSmart";
+            FormClosing += FormPrincipal_FormClosing;
+            Load += FormPrincipal_Load;
+            KeyDown += FormPrincipal_KeyDown;
             pnPrincipal.ResumeLayout(false);
             pnPrincipal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbPrincipal).EndInit();
             gbNavegacao.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvAlertaRisco).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvAlertas).EndInit();
             pnTotalAlunos.ResumeLayout(false);
             pnTotalAlunos.PerformLayout();
             pnMatriculasAtivas.ResumeLayout(false);
@@ -362,7 +416,7 @@
         private PictureBox pbPrincipal;
         private Label lblPainelPrincipal;
         private GroupBox gbNavegacao;
-        private DataGridView dgvAlertaRisco;
+        private DataGridView dgvAlertas;
         private Button btnAluno;
         private Button btnFalta;
         private Button btnMatricula;
@@ -379,7 +433,12 @@
         private Panel pnAlertasCriticos;
         private Label lblValorAlertasCriticos;
         private Label lblAlertasCriticos;
-        private Button btnExecutarAnaliseRisco;
-        private Button button1;
+        private Button btnExecutarIA;
+        private Button btnAtualizarAlertas;
+        private DataGridViewTextBoxColumn NomeAluno;
+        private DataGridViewTextBoxColumn NomeDisciplina;
+        private DataGridViewTextBoxColumn NivelRisco;
+        private DataGridViewTextBoxColumn JustificativaIa;
+        private DataGridViewTextBoxColumn DataAnalise;
     }
 }

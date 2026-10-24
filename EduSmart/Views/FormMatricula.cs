@@ -197,9 +197,10 @@ namespace EduSmart.Views
 
         private void FormMatricula_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //this.Hide();
-            //var form = new FormPrincipal();
-            //form.ShowDialog();
+            this.Hide();
+
+            var form = new FormPrincipal();
+            form.ShowDialog();
         }
 
         private void FormMatricula_KeyDown(object sender, KeyEventArgs e)

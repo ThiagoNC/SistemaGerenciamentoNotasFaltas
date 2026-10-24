@@ -280,9 +280,10 @@ namespace EduSmart.Views
 
         private void FormNota_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //this.Hide();
-            //var form = new FormPrincipal();
-            //form.ShowDialog();
+            this.Hide();
+
+            var form = new FormPrincipal();
+            form.ShowDialog();
         }
 
         private void FormNota_KeyDown(object sender, KeyEventArgs e)

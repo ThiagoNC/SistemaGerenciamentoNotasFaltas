@@ -269,9 +269,10 @@ namespace EduSmart.Views
 
         private void FormFalta_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //this.Hide();
-            //var form = new FormPrincipal();
-            //form.ShowDialog();
+            this.Hide();
+
+            var form = new FormPrincipal();
+            form.ShowDialog();
         }
 
         private void FormFalta_KeyDown(object sender, KeyEventArgs e)

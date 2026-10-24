@@ -175,8 +175,8 @@ namespace EduSmart.Views
         {
             this.Hide();
 
-            //var form = new FormPrincipal();
-            //form.ShowDialog();
+            var form = new FormPrincipal();
+            form.ShowDialog();
         }
 
         private void FormAluno_KeyDown(object sender, KeyEventArgs e)
