@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProfessor));
             pnProfessores = new Panel();
             pbProfessores = new PictureBox();
@@ -37,10 +37,6 @@
             btnAtualizar = new Button();
             txtPesquisar = new TextBox();
             dgvProfessores = new DataGridView();
-            id = new DataGridViewTextBoxColumn();
-            nome = new DataGridViewTextBoxColumn();
-            email = new DataGridViewTextBoxColumn();
-            senhaHash = new DataGridViewTextBoxColumn();
             gbProfessor = new GroupBox();
             pbOlho = new PictureBox();
             btnExcluir = new Button();
@@ -52,6 +48,10 @@
             lblNome = new Label();
             txtSenha = new TextBox();
             lblSenhaHash = new Label();
+            id = new DataGridViewTextBoxColumn();
+            nome = new DataGridViewTextBoxColumn();
+            email = new DataGridViewTextBoxColumn();
+            senhaHash = new DataGridViewTextBoxColumn();
             pnProfessores.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbProfessores).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvProfessores).BeginInit();
@@ -102,6 +102,7 @@
             btnAtualizar.TabIndex = 75;
             btnAtualizar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnAtualizar.UseVisualStyleBackColor = false;
+            btnAtualizar.Click += btnAtualizar_Click;
             // 
             // txtPesquisar
             // 
@@ -111,22 +112,23 @@
             txtPesquisar.PlaceholderText = "Pesquisar professores...";
             txtPesquisar.Size = new Size(150, 23);
             txtPesquisar.TabIndex = 74;
+            txtPesquisar.TextChanged += txtPesquisar_TextChanged;
             // 
             // dgvProfessores
             // 
-            dataGridViewCellStyle3.BackColor = Color.Gainsboro;
-            dgvProfessores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = Color.Gainsboro;
+            dgvProfessores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvProfessores.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvProfessores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProfessores.BackgroundColor = Color.White;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Control;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvProfessores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvProfessores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvProfessores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProfessores.Columns.AddRange(new DataGridViewColumn[] { id, nome, email, senhaHash });
             dgvProfessores.Location = new Point(378, 209);
@@ -135,34 +137,7 @@
             dgvProfessores.ReadOnly = true;
             dgvProfessores.Size = new Size(618, 296);
             dgvProfessores.TabIndex = 73;
-            // 
-            // id
-            // 
-            id.DataPropertyName = "id";
-            id.HeaderText = "ID";
-            id.Name = "id";
-            id.ReadOnly = true;
-            id.Visible = false;
-            // 
-            // nome
-            // 
-            nome.HeaderText = "Nome";
-            nome.Name = "nome";
-            nome.ReadOnly = true;
-            // 
-            // email
-            // 
-            email.HeaderText = "E-mail";
-            email.Name = "email";
-            email.ReadOnly = true;
-            // 
-            // senhaHash
-            // 
-            senhaHash.DataPropertyName = "senhaHash";
-            senhaHash.HeaderText = "Senha";
-            senhaHash.Name = "senhaHash";
-            senhaHash.ReadOnly = true;
-            senhaHash.Visible = false;
+            dgvProfessores.CellClick += dgvProfessors_CellClick;
             // 
             // gbProfessor
             // 
@@ -208,6 +183,7 @@
             btnExcluir.TabIndex = 8;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = false;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnSalvar
             // 
@@ -221,6 +197,7 @@
             btnSalvar.TabIndex = 7;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = false;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // btnNovo
             // 
@@ -234,6 +211,7 @@
             btnNovo.TabIndex = 6;
             btnNovo.Text = "Novo";
             btnNovo.UseVisualStyleBackColor = false;
+            btnNovo.Click += btnNovo_Click;
             // 
             // lblEmail
             // 
@@ -290,6 +268,36 @@
             lblSenhaHash.TabIndex = 0;
             lblSenhaHash.Text = "Senha:";
             // 
+            // id
+            // 
+            id.DataPropertyName = "id";
+            id.HeaderText = "ID";
+            id.Name = "id";
+            id.ReadOnly = true;
+            id.Visible = false;
+            // 
+            // nome
+            // 
+            nome.DataPropertyName = "nome";
+            nome.HeaderText = "Nome";
+            nome.Name = "nome";
+            nome.ReadOnly = true;
+            // 
+            // email
+            // 
+            email.DataPropertyName = "email";
+            email.HeaderText = "E-mail";
+            email.Name = "email";
+            email.ReadOnly = true;
+            // 
+            // senhaHash
+            // 
+            senhaHash.DataPropertyName = "senhaHash";
+            senhaHash.HeaderText = "Senha";
+            senhaHash.Name = "senhaHash";
+            senhaHash.ReadOnly = true;
+            senhaHash.Visible = false;
+            // 
             // FormProfessor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -304,6 +312,9 @@
             Name = "FormProfessor";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Professores - EduSmart";
+            FormClosing += FormProfessor_FormClosing;
+            Load += FormProfessor_Load;
+            KeyDown += FormProfessor_KeyDown;
             pnProfessores.ResumeLayout(false);
             pnProfessores.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbProfessores).EndInit();
@@ -333,10 +344,10 @@
         private Label lblNome;
         private TextBox txtSenha;
         private Label lblSenhaHash;
+        private PictureBox pbOlho;
         private DataGridViewTextBoxColumn id;
         private DataGridViewTextBoxColumn nome;
         private DataGridViewTextBoxColumn email;
         private DataGridViewTextBoxColumn senhaHash;
-        private PictureBox pbOlho;
     }
 }

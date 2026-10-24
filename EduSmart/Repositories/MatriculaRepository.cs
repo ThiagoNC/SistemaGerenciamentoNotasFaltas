@@ -67,7 +67,7 @@ namespace EduSmart.Repositories
             }
         }
 
-        public Matricula BuscarPorId(int id)
+        public Matricula ListarPorId(int id)
         {
             Matricula matricula = null;
 
@@ -191,7 +191,17 @@ namespace EduSmart.Repositories
                     {
                         while (reader.Read())
                         {
-                            matriculas.Add(MapearMatriculaComJoin(reader));
+                            matriculas.Add(new Matricula
+                            {
+                                Id = Convert.ToInt32(reader["id"]),
+                                IdAluno = Convert.ToInt32(reader["idAluno"]),
+                                IdDisciplina = Convert.ToInt32(reader["idDisciplina"]),
+                                IdProfessor = Convert.ToInt32(reader["idProfessor"]),
+                                Semestre = reader["semestre"].ToString(),
+                                NomeAluno = reader["NomeAluno"].ToString(),
+                                NomeDisciplina = reader["NomeDisciplina"].ToString(),
+                                NomeProfessor = reader["NomeProfessor"].ToString()
+                            });
                         }
                     }
                 }

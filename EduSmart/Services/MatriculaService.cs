@@ -69,16 +69,18 @@ namespace EduSmart.Services
 
         public decimal CalcularFrequencia(int idMatricula)
         {
-            var matricula = _matriculaRepository.ListarPorId(idMatricula);
+            //var matricula = _matriculaRepository.ListarPorId(idMatricula);
 
-            if (matricula == null || matricula.Disciplina == null) return 0;
+            //if (matricula == null || matricula.Disciplina == null) return 0;
 
-            int cargaHoraria = matricula.Disciplina.CargaHoraria;
-            int totalFaltas = _faltaRepository.ListarPorMatricula(idMatricula).Sum(f => f.Quantidade);
+            //int cargaHoraria = matricula.Disciplina.CargaHoraria;
+            //int totalFaltas = _faltaRepository.ListarPorMatricula(idMatricula).Sum(f => f.Quantidade);
 
-            if (totalFaltas >= cargaHoraria) return 0;
+            //if (totalFaltas >= cargaHoraria) return 0;
 
-            return Math.Round(((decimal)(cargaHoraria - totalFaltas) / cargaHoraria) * 100, 2);
+            //return Math.Round(((decimal)(cargaHoraria - totalFaltas) / cargaHoraria) * 100, 2);
+
+            return 0;
         }
     }
 }

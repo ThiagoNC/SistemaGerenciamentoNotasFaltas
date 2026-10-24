@@ -24,9 +24,9 @@ namespace EduSmart.Views
             {
                 var service = new ProfessorService();
 
-                var listaProfessors = service.ListarTodos().OrderBy(b => b.Nome).ToList();
+                var listaProfessores = service.ListarTodos().OrderBy(b => b.Nome).ToList();
 
-                dgvProfessores.DataSource = listaProfessors;
+                dgvProfessores.DataSource = listaProfessores;
             }
             catch (Exception ex)
             {
@@ -38,13 +38,13 @@ namespace EduSmart.Views
         {
             AtualizarGrid();
 
-            foreach (DataGridViewColumn coluna in dgvProfessors.Columns)
+            foreach (DataGridViewColumn coluna in dgvProfessores.Columns)
             {
                 coluna.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 coluna.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
 
-            dgvProfessors.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProfessores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //dgvProfessors.Columns["DataNascimento"].DefaultCellStyle.Format = "dd/MM/yyyy";
         }
 
@@ -64,13 +64,13 @@ namespace EduSmart.Views
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = dgvProfessors.Rows[e.RowIndex];
+                DataGridViewRow row = dgvProfessores.Rows[e.RowIndex];
 
                 string idSelecionado = row.Cells["id"].Value.ToString();
 
-                txtRa.Text = row.Cells["ra"].Value.ToString();
                 txtNome.Text = row.Cells["nome"].Value.ToString();
                 txtEmail.Text = row.Cells["email"].Value.ToString();
+                txtSenha.Text = row.Cells["senhaHash"].Value.ToString();
                 //dtpDtNascimento.Value = Convert.ToDateTime(row.Cells["dataNascimento"].Value);
 
                 this.Tag = idSelecionado;
@@ -79,19 +79,19 @@ namespace EduSmart.Views
 
         private void Novo()
         {
-            txtRa.Clear();
             txtNome.Clear();
             txtEmail.Clear();
+            txtSenha.Clear();
             //dtpDtNascimento.Value = DateTime.Now;
             this.Tag = null;
-            txtRa.Focus();
+            txtNome.Focus();
         }
 
         private void txtPesquisar_TextChanged(object sender, EventArgs e)
         {
             var service = new ProfessorService();
 
-            //dgvProfessors.DataSource = service.ListarPorNome(txtPesquisar.Text).OrderBy(b => b.Nome).ToList();
+            dgvProfessores.DataSource = service.ListarPorNome(txtPesquisar.Text).OrderBy(b => b.Nome).ToList();
         }
 
         private void btnAtualizar_Click(object sender, EventArgs e)
@@ -109,15 +109,21 @@ namespace EduSmart.Views
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtRa.Text))
-                {
-                    MessageBox.Show("O RA é obrigatório!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
                 if (string.IsNullOrWhiteSpace(txtNome.Text))
                 {
                     MessageBox.Show("O nome é obrigatório!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtEmail.Text))
+                {
+                    MessageBox.Show("O e-mail é obrigatório!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(txtSenha.Text))
+                {
+                    MessageBox.Show("O senha é obrigatório!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -125,13 +131,13 @@ namespace EduSmart.Views
 
                 if (this.Tag == null || string.IsNullOrEmpty(this.Tag.ToString()))
                 {
-                    service.Inserir(new Professor { Ra = txtRa.Text, Nome = txtNome.Text, Email = txtEmail.Text });
+                    service.Inserir(new Professor { Nome = txtNome.Text, Email = txtEmail.Text, SenhaHash = txtSenha.Text, });
                     MessageBox.Show("Professor cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     int id = Convert.ToInt32(this.Tag);
-                    service.Atualizar(new Professor { Id = id, Ra = txtRa.Text, Nome = txtNome.Text, Email = txtEmail.Text });
+                    service.Atualizar(new Professor { Id = id, Nome = txtNome.Text, Email = txtEmail.Text, SenhaHash = txtSenha.Text, });
                     MessageBox.Show("Professor atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -149,11 +155,11 @@ namespace EduSmart.Views
         {
             if (this.Tag == null || string.IsNullOrEmpty(this.Tag.ToString()))
             {
-                MessageBox.Show("Por favor, selecione um aluno na lista para excluir.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, selecione um professor na lista para excluir.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            DialogResult confirmacao = MessageBox.Show("Tem certeza que deseja excluir este aluno?",
+            DialogResult confirmacao = MessageBox.Show("Tem certeza que deseja excluir este professor?",
                                                        "Confirmar Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (confirmacao == DialogResult.Yes)
